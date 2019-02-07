@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      정부사물인터넷망 공통기반 구축 &middot; Yeo Song Blog
+    
+  </title>
+
+  
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+  <script id="dsq-count-scr" src="//{ site.disqus.shortname }}.disqus.com/count.js" async></script>
+
+  <body class="post">
+
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        Yeo Song Blog
+      </a>
+    </div>
+    <p class="lead"></p>
+  </header>
+  <nav id="sidebar-nav-links">
+  
+    <a class="home-link "
+        href="/">Home</a>
+  
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/about.html">About</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/analysis.html">Analysis</a>
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/frentend.html">FrontEnd</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/linux.html">Linux</a>
+    
+  
+
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/oneM2M.html">onem2m</a>
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/performance.html">Performance</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/springboot.html">Springboot</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/work.html">Work</a>
+    
+  
+
+  
+
+  
+    
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+  
+
+  <a id="subscribe-link"
+     class="icon" title="Subscribe" aria-label="Subscribe"
+     href="/feed.xml">
+    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+  </a>
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+    <a id="search-link"
+       class="icon"
+       title="Search" aria-label="Search"
+       href="/search.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+    </a>
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+
+  <p>
+  &copy; 2019.
+  <a href="/LICENSE.md">MIT License.</a>
+</p>
+
+</div>
+
+    <main class="container">
+      <header>
+  <h1 class="post-title">정부사물인터넷망 공통기반 구축</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  <span class="post-date">11 Jan 2019</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        <a href="/category/work.html">
+          Work
+        </a>
+      
+    
+  </span>
+</div>
+
+
+  <div class="post-body">
+    <ol>
+  <li>사업 기간 : 2018.07 ~ 2018.12
+    <ul>
+      <li>입찰공고번호 : 제 20180538041-00 호</li>
+      <li>수요 기관 : 한국정보화진흥원</li>
+      <li>품명 : 정보시스템개발 서비스</li>
+    </ul>
+  </li>
+  <li>사업 배경
+    <ul>
+      <li>다양한 통신 기술 방식으로 구축된 행정기관 통신사 IoT 통신망을 상호 연계하는 표준 통신 인프라 구축</li>
+    </ul>
+  </li>
+  <li>구축 인프라 환경
+    <ul>
+      <li>단말기 -&gt; 게이트웨이 -&gt; 네트워크 서버 -&gt; 공통기반 -&gt; IoT 서비스</li>
+    </ul>
+  </li>
+  <li>IoT 시범 서비스 개발
+    <ul>
+      <li>oneM2M 표준 인터페이스 기반
+        <ul>
+          <li>스마트 플러그 디바이스 데이터 제어 및 수집</li>
+          <li>스마트 환경 센서 데이터 수집</li>
+          <li>GPS Tracker 수집</li>
+        </ul>
+      </li>
+      <li>oneM2M 센싱 데이터 실시간 분석
+        <ul>
+          <li>분석 결과 수집 Websocket 으로 모바일 앱에 실시간 전달</li>
+        </ul>
+      </li>
+      <li>Spring Boot 기반으로 서비스 FailOver 기능 구현</li>
+      <li>Private oneM2M 센싱 로그 데이터 엘라스틱 서치 엔진 기반 모니터링 환경 구축</li>
+      <li>Private 서비스 성능 모니터링 환경 구축</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="네트워크-인터페이스-구조">네트워크 인터페이스 구조</h2>
+<ul>
+  <li>
+    <p>UpLink 인터페이스 구조 : IOT 센서가 데이터를 주기적으로 상위 네트워크로 전달하는 구간을 uplink 라고 정의<br />
+<img src="/assets/giot/0.Report.png" alt="Report" /></p>
+  </li>
+  <li>
+    <p>DownLink 인터페이스 구조 : IOT 센서가 제어 명령을 상위 네트워크로 전달 받는 구간을 downlink 라고 정의
+<img src="/assets/giot/0.CommandFlow.png" alt="Command" /></p>
+  </li>
+</ul>
+
+<h2 id="내부-서비스--서버-구조">내부 서비스  서버 구조</h2>
+<ul>
+  <li>내부 서비스 서버 구조는 Spring Boot Cloud 기반으로 구성되어 있으며, 하나의 서버가 죽더라도 장애 복구되는 시스템으로 구성</li>
+  <li>서비스 등록
+    <ul>
+      <li>서비스 제공자 관점에서의 프로세스이며, 레지스트리에 항상 최신 정보 갱신</li>
+      <li>기동 시 유레카 서버에 서비스 등록 만약 연결 시에는 재연결 10간 간격으로 등록 시도</li>
+      <li>같은 서버스가 등록하는 이유는 HA 구성(Active-StandBy)으로 만들기 위함<br />
+<img src="/assets/giot/1.Reg.png" alt="Registration" /></li>
+    </ul>
+  </li>
+  <li>서비스 발견(Https)
+    <ul>
+      <li>사용자 관점에서 프로세스 API 호출이 들어오면 서비스 레지스트리에서 필요한 서비스를 찾아서 호출 할 수 있게 함  <br />
+<img src="/assets/giot/0.APICall.png" alt="API" /></li>
+    </ul>
+  </li>
+  <li>서비스 발견(WebSocket)
+    <ul>
+      <li>
+        <p>Https와 동일 처리 , Spring Zuul Gateway 1.0 이 Websocket을 지원하지 않아 https://github.com/mthizo247/spring-cloud-netflix-zuul-websocket 사용  <br />
+<img src="/assets/giot/2.WebsocketConnet.png" alt="WebSocketReq" /></p>
+      </li>
+      <li>
+        <p>Websocket 소켓 서버 리포트 
+<img src="/assets/giot/2.WebSocketRes.png" alt="WebSocketRes" /></p>
+      </li>
+    </ul>
+  </li>
+  <li>Https,WebSocket 서비스 엔드포인트를 ZuulGateway에 적용함으로 통신의 일관성을 항상 유지할 수 있는 장점이 있음</li>
+</ul>
+
+<h2 id="ha-장구-복구">HA 장구 복구</h2>
+<p><img src="/assets/giot/4.HAFailOver.png" alt="HaFailOver" /></p>
+
+<ul>
+  <li>HA 구성 테스트 소스 : https://github.com/kranian/spring_ha , 해당 소스는 아래 튜터니얼을 체크 하기 위해 한번 소스 수정</li>
+  <li>HA 구성 방법은 http://blog.marcosbarbero.com/ha-and-zone-affinity-spring-cloud-eureka/ 참고해서 테스팅</li>
+</ul>
+
+<h2 id="onem2m-연동">oneM2M 연동</h2>
+<ul>
+  <li>
+    <p>구독 신청 
+<img src="/assets/giot/3.Subs.png" alt="Subscription" /></p>
+  </li>
+  <li>
+    <p>oneM2M Notify<br />
+<img src="/assets/giot/3.Notify.png" alt="Notify" /></p>
+  </li>
+</ul>
+
+<h2 id="느낌점">느낌점</h2>
+<ul>
+  <li>Spring Boot Cloud 기반으로 S/W구현시 이중화 인프라 구성 구성</li>
+  <li>이중화 인프라 구성을 상용 WAS 이중 화 설정 보다 쉽게 적용
+    <h2 id="기타">기타</h2>
+  </li>
+  <li>파이선이나, Node JS도 구현된 웹 서비스를 유레카에 등록하고 싶을 경우,Spring Boot SideCar를 참고하기 바란다.</li>
+</ul>
+
+
+    
+
+
+
+<div class="post-tags">
+  
+    
+    <a href="/tags.html#government-task">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">Government task</span>
+    </a>
+  
+</div>
+  </div>
+
+  
+  <section class="comments">
+    <h2>Comments</h2>
+    
+  <div id="disqus_thread">
+    <!--<button class="disqus-load" onClick="loadDisqusComments()">-->
+      <!--Load Comments-->
+    <!--</button>-->
+    <script>
+    var d = document, s = d.createElement('script');
+    s.src = '//kranian.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    </script>
+  </div>
+  <script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW
+  *  TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT:s
+  *  https://disqus.com/admin/universalcode/#configuration-variables
+  */
+  var disqus_config = function () {
+    this.page.url = "http://0.0.0.0:4000/work/2019/01/11/GIOT.html";
+    this.page.identifier = "" ||
+                           "http://0.0.0.0:4000/work/2019/01/11/GIOT.html";
+  }
+  function loadDisqusComments() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//kranian.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  </script>
+  <noscript>
+    Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus</a>.
+  </noscript>
+
+
+
+  </section>
+
+  <section class="related">
+  <h2>Related Posts</h2>
+  <ul class="posts-list">
+    
+      <li>
+        <h3>
+          <a href="/onem2m/2019/01/31/onem2m_tester_install.html">
+            IoTKETI/oneM2MTester 설치 하기
+            <small>31 Jan 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/onem2m/2019/01/31/onem2m_tester_cli.html">
+            IoTKETI/oneM2MTester CLI 모드로 실행 하기
+            <small>31 Jan 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/meetup/2019/01/27/IOTBadge.html">
+            마이크로파이썬 네임태그 앱 이식 하기(IBM Developer Meetup 2018)
+            <small>27 Jan 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</section>
+
+</div>
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>

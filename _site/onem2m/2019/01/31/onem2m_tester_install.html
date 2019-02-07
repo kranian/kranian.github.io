@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      IoTKETI/oneM2MTester 설치 하기 &middot; Yeo Song Blog
+    
+  </title>
+
+  
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+  <script id="dsq-count-scr" src="//{ site.disqus.shortname }}.disqus.com/count.js" async></script>
+
+  <body class="post">
+
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        Yeo Song Blog
+      </a>
+    </div>
+    <p class="lead"></p>
+  </header>
+  <nav id="sidebar-nav-links">
+  
+    <a class="home-link "
+        href="/">Home</a>
+  
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/about.html">About</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/analysis.html">Analysis</a>
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/frentend.html">FrontEnd</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/linux.html">Linux</a>
+    
+  
+
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/oneM2M.html">onem2m</a>
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/performance.html">Performance</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/springboot.html">Springboot</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/work.html">Work</a>
+    
+  
+
+  
+
+  
+    
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+  
+
+  <a id="subscribe-link"
+     class="icon" title="Subscribe" aria-label="Subscribe"
+     href="/feed.xml">
+    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+  </a>
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+    <a id="search-link"
+       class="icon"
+       title="Search" aria-label="Search"
+       href="/search.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+    </a>
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+
+  <p>
+  &copy; 2019.
+  <a href="/LICENSE.md">MIT License.</a>
+</p>
+
+</div>
+
+    <main class="container">
+      <header>
+  <h1 class="post-title">IoTKETI/oneM2MTester 설치 하기</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  <span class="post-date">31 Jan 2019</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        <a href="/category/oneM2M.html">
+          onem2m
+        </a>
+      
+    
+  </span>
+</div>
+
+
+  <div class="post-body">
+    <h1 id="배경">배경</h1>
+<ul>
+  <li>
+    <p>나는 IoTKETI/oneM2MTester 메뉴얼에 적힌 OS 환경이 달라 이력 사항으로 설치 이력을 아래와 같이 남긴다.  <br />
+ 참고사항으로 IoTKETI/oneM2MTester 메뉴얼에 적힌 환경 정보는 <strong>Ubuntu 16.04</strong> 기반이며 Titan Core 바이너리 또한 Ubuntu 16.04 기반만 배포 하고 있다. 
+ 만약 처음 설치 하시는 유저는 Ubuntu 16.04에 하는걸 권고한다.</p>
+  </li>
+  <li>
+    <p>해당 툴을 처음 설치하는 분들게 설치에 도움이 되길 희망 한다.</p>
+  </li>
+</ul>
+
+<h1 id="1-설치-환경-정보">1. 설치 환경 정보</h1>
+<p><img src="/assets/tester/osinfo.png" alt="os" /></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 환경 정보</span>
+OS : Ubuntu 18.04 x86_64 , Linux 
+</code></pre></div></div>
+<h1 id="2-onem2mtester-runtime-environment">2. oneM2MTester Runtime Environment</h1>
+<p>테스트 환경을 설정 하기 하기 다음 4가지 설정이 필요하다.</p>
+<ol>
+  <li>Java 1.8 설치</li>
+  <li>Eclipse 와 plugins install</li>
+  <li>Titan Core install</li>
+  <li>Configurations : Eclipse 설정</li>
+</ol>
+
+<h2 id="21-java-jdk-인스톨">2.1. Java JDK 인스톨</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>add-apt-repository ppa:openjdk-r/ppa
+<span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>openjdk-8-jdk
+</code></pre></div></div>
+
+<h3 id="22-eclipse-와-titan-plugins-install">2.2 Eclipse 와 Titan plugins install</h3>
+<p><img src="/assets/tester/eclipse_download.png" alt="eclise" /></p>
+<ul>
+  <li>eclipse ide 2018-12 설치</li>
+  <li>인스톨러에서 java developer 플러그인 설치</li>
+</ul>
+
+<p><img src="/assets/tester/titan_plugin_download.png" alt="eclise" /></p>
+<ul>
+  <li>이클립스 타이탄 플러그인 설치 : 6.5.0 설치</li>
+</ul>
+
+<h2 id="23-titan-core-install">2.3 Titan Core install</h2>
+<p><img src="/assets/tester/titan_download.png" alt="titan" /></p>
+<ul>
+  <li>6.4.0 소스 다운로드 후 소스 컴파일</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 타이탄 코어 소스 에 필요한 컴파일 도구 설치 </span>
+<span class="nb">sudo </span>apt <span class="nb">install </span>build-essential
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>automake
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>g++ expect libssl-dev libxml2-dev libncurses5-dev flex bison
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>xutils-dev
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>ant xsltproc
+
+<span class="c"># 빌드 소스 환경 만들기   </span>
+<span class="nb">mkdir</span> ~/titan.core
+
+<span class="c"># 빌드 소스 다운로드  </span>
+wget https://github.com/eclipse/titan.core/archive/6.4.0.tar.gz
+
+<span class="c"># 타이탄 소스 풀기 </span>
+<span class="nb">tar </span>xvfz xvf 6.4.0.tar.gz <span class="nt">-C</span> ~/titan.core/
+
+<span class="c"># 빌드 하기 위해 타이탄 소스로 이동  </span>
+<span class="nb">cd</span> ~/titan.core/titan.core-6.4.0
+
+<span class="c"># 빌드 바이너리 개인 설정 추가 </span>
+~/titan.core/titan.core-6.4.0<span class="nv">$ </span><span class="nb">cat</span> <span class="o">&gt;</span> Makefile.personal
+TTCN3_DIR :<span class="o">=</span> /home/jskim/titan.core/Install  
+XMLDIR :<span class="o">=</span> /usr
+OPENSSL_DIR :<span class="o">=</span> /usr
+JNI :<span class="o">=</span> no
+
+<span class="c"># 빌드</span>
+<span class="c"># 소스 빌드 시간은 CPU 사양이 낮으면 1~2시간 소용된다. 여기에서는 약 10분내외로 컴파일 되었다.    </span>
+~/titan.core/titan.core-6.4.0<span class="nv">$ </span>make <span class="nt">-j</span> 24
+~/titan.core/titan.core-6.4.0<span class="nv">$ </span>make all 
+~/titan.core/titan.core-6.4.0<span class="nv">$ </span>make <span class="nb">install</span> 
+
+<span class="c"># 빌드 성공 후 확인  </span>
+~/titan.core/titan.core-6.4.0/Install# <span class="nb">ls</span> <span class="nt">-lt</span>
+drwxr-xr-x 3 xxx xxx 4096 Jan 31 09:40 man
+drwxr-xr-x 4 xxx xxx 4096 Jan 31 09:40 include
+drwxr-xr-x 2 xxx xxx 4096 Jan 31 09:40 lib
+drwxr-xr-x 5 xxx xxx 4096 Jan 31 09:40 etc
+drwxr-xr-x 2 xxx xxx 4096 Jan 31 09:40 bin
+drwxr-xr-x 5 xxx xxx 4096 Jan 31 09:40 <span class="nb">help
+</span>drwxr-xr-x 2 xxx xxx 4096 Jan 31 09:40 demo
+
+<span class="c"># 타이탄 코어 실행을 위한 환경 설정 추가  </span>
+~/.bashrc 파일 안에 다음 환경 설정 추가 
+...
+<span class="nb">export </span><span class="nv">TTCN3_DIR</span><span class="o">=</span>/home/jskim/bin/titan.core
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="k">${</span><span class="nv">TTCN3_DIR</span><span class="k">}</span>/bin:<span class="k">${</span><span class="nv">PATH</span><span class="k">}</span> 
+<span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="k">${</span><span class="nv">TTCN3_DIR</span><span class="k">}</span>/lib:<span class="k">${</span><span class="nv">LD_LIBRARY_PATH</span><span class="k">}</span>
+.. 
+</code></pre></div></div>
+
+<h2 id="24-이클립스-환경-설정">2.4 이클립스 환경 설정</h2>
+<ul>
+  <li>이클립스 에서 타이탄 코어 설치 위치 설정 
+<img src="/assets/tester/eclipse_titan_config.png" alt="titan_config" /></li>
+</ul>
+
+<h2 id="25-onem2mtester-테스터-소스-eclipse에-import">2.5 oneM2Mtester 테스터 소스 Eclipse에 import</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># oneM2Mtester 소스 다운로드
+git https://github.com/IoTKETI/oneM2MTester.git 
+
+# local eclipse workspace에 해당 소스 workspace에 import  
+</code></pre></div></div>
+
+<h2 id="26-eclipse-자동-빌드-확인">2.6 Eclipse 자동 빌드 확인</h2>
+<p><img src="/assets/tester/onem2m_tester_builder.png" alt="onem2m_titan_config" /></p>
+
+<h2 id="27-onem2m-환경-설정">2.7 oneM2M 환경 설정</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>공식 메뉴얼에는 src &gt; oneM2MTestConfig.cfg 파일을 시험기 환경 설정에 맞추어 설정 하라고 가이드 하고 있다.   
+아래 기본 설정들은 Mobius 에 맞추어 있다.
+ 
+[MAIN_CONTROLLER]
+# The options herein control the behavior of MC.
+TCPPort := 9580
+KillTimer := 10.0
+
+[LOGGING]
+LogFile 			:= "../logs/%e.%h-%r.%s"
+FileMask 			:= LOG_ALL | DEBUG | ERROR | USER | WARNING | TESTCASE | STATISTICS | MATCHING |VERDICTOP_SETVERDICT
+ConsoleMask 		:= TESTCASE | PORTEVENT | ERROR | STATISTICS | MATCHING | VERDICTOP_SETVERDICT | DEBUG
+LogSourceInfo 	    := Yes
+AppendFile 		    := No
+TimeStampFormat 	:= DateTime
+LogEventTypes 	    := Yes
+SourceInfoFormat 	:= Single
+LogEntityName 	    := Yes
+
+[TESTPORT_PARAMETERS]
+// mcaPort 
+system.mcaPort.defaultListeningPort				:= "0"               // Allow to use specific port number      
+system.mcaPort.map_behavior						:= "connect"  
+system.mcaPort.RemotePort						:= "7579"	  		 // SUT - Port
+system.mcaPort.RemoteHost						:= "192.168.19.147"   // SUT - IP    
+system.mcaPort.lazy_conn_id_handling			:= "yes"  
+system.mcaPort.debug                            := "yes"
+system.mcaPort.map_protocol                     := "tcp"
+
+// mccPort
+system.mccPort.defaultListeningPort				:= "0"  
+system.mccPort.map_behavior						:= "connect"  
+system.mccPort.RemotePort						:= "7579"	  		  // SUT - Port
+system.mccPort.RemoteHost						:= "192.168.19.147"   // SUT - IP    
+system.mccPort.lazy_conn_id_handling			:= "yes"  
+system.mccPort.debug                            := "yes"
+system.mcaPort.map_protocol                     := "tcp"
+
+// utPort, this port is used to perform the AE testing.
+system.utPort.defaultListeningPort				:= "0"  
+system.utPort.map_behavior						:= "connect"  
+system.utPort.RemotePort						:= "3000"	  		 // UpperTester - Port
+system.utPort.RemoteHost						:= "192.168.19.147"   // UpperTester - IP    
+system.utPort.lazy_conn_id_handling				:= "yes"  
+system.utPort.debug                             := "yes"  
+
+// mcaPortIn 
+system.mcaPortIn.defaultListeningPort			:= "62590"           // Allow to use specific port number      
+system.mcaPortIn.map_behavior					:= "listen"   
+system.mcaPortIn.debug                          := "yes"
+system.mcaPortIn.map_protocol                   := "tcp" 
+
+[MODULE_PARAMETERS]
+	
+#OneM2M_Constants.tsp_connectionParams 		:=  {"{SUT-SERVER-IP}", Integer_port, "TEST-SYSTEM-IP", Integer_port};
+OneM2M_Constants.tsp_connectionParams 		:=  {"192.168.0.153", 7579, "192.168.19.145", 27689};
+
+OneM2M_Pixits.PX_SERIALIZATION 				:= "JSON"; ## json or xml  
+-----------------------------&gt; 시험기 데이타 타입 설정 
+OneM2M_Pixits.PX_PROTOCOL_BINDING 			:= "HTTP"; ## coap or http or mqtt 
+-----------------------------&gt; 시험기 프로토콜 설정 
+
+OneM2M_Pixits.PX_RUN_POSTAMBLE 						:= true;
+    
+# SUT M2M-Service Provider ID
+OneM2M_Pixits.PX_SP_ID								:= "//keti.re.kr"; 
+-----------------------------&gt; 시험기 절대 주소체계 설정
+   
+# Primtive scope could only either be 'e_cseRelative', 'e_spRelative', or 'e_absolute'
+OneM2M_Pixits.PX_PRIMITIVE_SCOPE					:= e_cseRelative; 
+-----------------------------&gt; 시험기 주소체계 설정 
+    
+# Addressing format can only either be 'e_hierarchical' or 'e_nonHierarchical'
+OneM2M_Pixits.PX_ADDRESSING_METHOD 					:= e_hierarchical; 
+-----------------------------&gt; 시험기 주소체계 설정
+
+
+OneM2M_Pics.PICS_STRUCTURED_CSE_RELATIVE_RESOURCE_ID_FORMAT 	:= true;	  // hierarcahial CSE-relative resource format support declaration
+// OneM2M_Pics.PICS_UNSTRUCTURED_CSE_RELATIVE_RESOURCE_ID_FORMAT 	:= false; // set to 'true' only when 'PX_ADDRESSING_METHOD' is set to 'e_nonHierarchical'
+    	
+OneM2M_Pics.PICS_ACP_SUPPORT 									:= true;
+OneM2M_Pics.PICS_IN_CSE 										:= true;	
+
+# Which component do you want to test (IN or MN)?
+OneM2M_Pixits.PX_IN_CSE	:= true;
+OneM2M_Pixits.PX_MN_CSE	:= false; 	
+OneM2M_Pixits.PX_ASN_CSE:= false; 
+
+# Checking utTrigger port for the automated testing
+OneM2M_Pixits.PX_UT_IMPLEMENTED := false;
+       
+# Parameter settings for the SUT
+OneM2M_Pixits.PX_CSE_ID						:= "/Mobius";// SP-relative_CSE-ID;   
+--------------------&gt; 시험기 CSE ID 설정
+OneM2M_Pixits.PX_CSE_NAME					:= "Mobius"; // CSEBase resource name 
+--------------------&gt; 시험기 CSE Name 설정 
+OneM2M_Pixits.PX_CSE_RESOURCE_ID			:= "Mobius"; // CSE-relative_CSE-ID; 
+    
+OneM2M_Pixits.PX_SUT_ADDRESS				:= "192.168.35.34:7579"; 
+--------------------&gt; IUT 주소 수정 
+OneM2M_Pixits.PX_AE1_ADDRESS				:= "192.168.19.147:62590"; // poa for notification url
+OneM2M_Pixits.PX_AE2_ADDRESS				:= "192.168.19.147:62590"; // poa for notification url
+
+	
+OneM2M_Pixits.PX_AE1_ID_STEM				:= "C_AE_ID_STEM_1"; // AE-ID-STEM has to start 'C' or 'S' 
+--------------------&gt; 시험기 설정 
+OneM2M_Pixits.PX_AE2_ID_STEM				:= "C_AE_ID_STEM_2"; // AE-ID-STEM has to start 'C' or 'S'
+OneM2M_Pixits.PX_APP_ID 					:= "0.2.481.2.0001.001.62590"; 
+--------------------&gt; 시험기 설정  
+    
+OneM2M_Pixits.PX_RESOURCES_TO_BE_DELETED 	:= {"MyAe"}; // {MyAe, MyAe2, ...}
+// OneM2M_Pixits.PX_RESOURCE_TO_BE_DELETED 	:= "MyAe";
+    
+OneM2M_Pixits.PX_SUPER_AE_ID				:= "/Superman"; // Superuser, CSE Minimum Provisioning
+OneM2M_Pixits.PX_SUPER_CSE_ID				:= "/Superman"; 
+
+// "all" access control policy is used for a few testcases: 
+// TC_CSE_SEC_ACP_004 series, TC_CSE_DMR_UPD_016_CSR_ET, TC_CSE_DMR_UPD_016_CSR_RR
+// OneM2M_Pixits.PX_ACOR	 					:= {"Mobius", "/Mobius", "C_AE_ID_STEM_1", "C_AE_ID_STEM_2"}; 
+OneM2M_Pixits.PX_ACOR                       := {"all"};
+
+OneM2M_Pixits.PX_ALLOWED_C_AE_IDS := {"C-AllowedAPX_ACOReId"};
+
+# These parameters are used for &lt;remoteCSE&gt;
+OneM2M_Pixits.PX_CSE1_ADDRESS				:= "192.168.35.34:7579";
+OneM2M_Pixits.PX_CSE1_NAME 					:= "Mobius";
+OneM2M_Pixits.PX_CSE1_ID 					:= "/Mobius";
+
+# supportedResourceTypes check of SUT
+OneM2M_Pixits.PX_SRT := {int1, int2, int3, int4, int5, int9, int10, int13, int14, int16, int17, int23};
+OneM2M_Pixits.PX_POA := {"http://192.168.19.147:7579"};
+
+# Parameter that are not used for the moment (Designed for test location management)
+OneM2M_Pixits.PX_IS_LOC_CONTAINER			:= false;
+OneM2M_Pixits.PX_XML_NAMESPACE 				:= "m2m=""http://www.onem2m.org/xml/protocols""";
+OneM2M_Pixits.PX_LOCATION_TARGET_ID			:= "{LOCATION-TARGET-ID}"; // SUPPOSE TO BE RECEIVED FROM LOCATION SERVER
+OneM2M_Pixits.PX_LOCATION_SERVER_ADDRESS	:= "{LOCATION-SERVER-ADDRESS}";	
+OneM2M_Pixits.PX_LOCATION_UPDATE_PERIOD		:= "PT10M10S" ;// 10 Minute 10 Seconds
+OneM2M_Pixits.PX_LOCATION_CONTAINER_NAME	:= "myLocContainer";
+ 
+</code></pre></div></div>
+<h2 id="참고">참고</h2>
+<ul>
+  <li><a href="https://github.com/IoTKETI/oneM2MTester/blob/master/doc/oneM2MTester_User_Manual/oneM2MTester_User_Guide_ver2_1_0.pdf">oneM2MTester 설치 메뉴얼</a></li>
+</ul>
+
+    
+
+
+
+<div class="post-tags">
+  
+    
+    <a href="/tags.html#test">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">test</span>
+    </a>
+  
+    
+    <a href="/tags.html#eclipse">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">eclipse</span>
+    </a>
+  
+    
+    <a href="/tags.html#java">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">java</span>
+    </a>
+  
+</div>
+  </div>
+
+  
+  <section class="comments">
+    <h2>Comments</h2>
+    
+  <div id="disqus_thread">
+    <!--<button class="disqus-load" onClick="loadDisqusComments()">-->
+      <!--Load Comments-->
+    <!--</button>-->
+    <script>
+    var d = document, s = d.createElement('script');
+    s.src = '//kranian.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    </script>
+  </div>
+  <script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW
+  *  TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT:s
+  *  https://disqus.com/admin/universalcode/#configuration-variables
+  */
+  var disqus_config = function () {
+    this.page.url = "http://0.0.0.0:4000/onem2m/2019/01/31/onem2m_tester_install.html";
+    this.page.identifier = "" ||
+                           "http://0.0.0.0:4000/onem2m/2019/01/31/onem2m_tester_install.html";
+  }
+  function loadDisqusComments() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//kranian.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  </script>
+  <noscript>
+    Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus</a>.
+  </noscript>
+
+
+
+  </section>
+
+  <section class="related">
+  <h2>Related Posts</h2>
+  <ul class="posts-list">
+    
+      <li>
+        <h3>
+          <a href="/onem2m/2019/01/31/onem2m_tester_cli.html">
+            IoTKETI/oneM2MTester CLI 모드로 실행 하기
+            <small>31 Jan 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/meetup/2019/01/27/IOTBadge.html">
+            마이크로파이썬 네임태그 앱 이식 하기(IBM Developer Meetup 2018)
+            <small>27 Jan 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/github/2019/01/24/Scouter-Papaper.html">
+            스카우터 페이퍼 토폴로지 그룹핑 텍스트 중복 현상 수정
+            <small>24 Jan 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</section>
+
+</div>
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>

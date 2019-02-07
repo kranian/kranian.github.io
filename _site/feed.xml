@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2019-01-31T18:22:13+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Yeo Song Blog</title><subtitle></subtitle><author><name>yeosong heo</name></author><entry><title type="html">IoTKETI/oneM2MTester CLI 모드로 실행 하기</title><link href="http://0.0.0.0:4000/onem2m/2019/01/31/onem2m_tester_cli.html" rel="alternate" type="text/html" title="IoTKETI/oneM2MTester CLI 모드로 실행 하기" /><published>2019-01-31T00:00:00+09:00</published><updated>2019-01-31T00:00:00+09:00</updated><id>http://0.0.0.0:4000/onem2m/2019/01/31/onem2m_tester_cli</id><content type="html" xml:base="http://0.0.0.0:4000/onem2m/2019/01/31/onem2m_tester_cli.html">&lt;h3 id=&quot;1-cli-mode-빌드&quot;&gt;1 CLI Mode 빌드&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 테스트 케이스 소스 생성 &lt;/span&gt;
+jskim@aisop_2_0:~/IdeaProjects&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git https://github.com/IoTKETI/oneM2MTester.git
+jskim@aisop_2_0:~/IdeaProjects&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;oneM2MTester 
+jskim@aisop_2_0:~/IdeaProjects/oneM2MTester&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;makefilegen &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; oneM2MTester.tpd
+
+&lt;span class=&quot;c&quot;&gt;# 테스트 케이스 빌드 &lt;/span&gt;
+jskim@aisop_2_0:~/IdeaProjects/oneM2MTester&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;bin 
+jskim@aisop_2_0:~/IdeaProjects/oneM2MTester/bin&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make
+&lt;span class=&quot;c&quot;&gt;# 테스트 케이스 빌드 성공 후 바이너리 생성된다. &lt;/span&gt;
+jskim@aisop_2_0:~/IdeaProjects/oneM2MTester/bin&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-ltr&lt;/span&gt;  
+...
+&lt;span class=&quot;nt&quot;&gt;-rw-rw-r--&lt;/span&gt; 1 jskim jskim  2485944 Jan 31 16:54 OneM2M_Testcases_CSE_Release_1.o
+&lt;span class=&quot;nt&quot;&gt;-rw-rw-r--&lt;/span&gt; 1 jskim jskim 63010152 Jan 31 16:56 OneM2M_Types.o
+&lt;span class=&quot;nt&quot;&gt;-rwxrwxr-x&lt;/span&gt; 1 jskim jskim 52715504 Jan 31 16:56 oneM2MTester &amp;lt;&lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt; 이파일이 생성된다. 
+
+&lt;span class=&quot;c&quot;&gt;# 해당파일 실행 하면 테스트 케이스 목록이 조회됨&lt;/span&gt;
+jskim@aisop_2_0:~/IdeaProjects/oneM2MTester/bin&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./oneM2MTester &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;
+...
+OneM2M_Testcases_CSE_Release_2.TC_CSE_SUB_UPD_008
+OneM2M_Testcases_CSE_Release_2.TC_CSE_SUB_UPD_009
+OneM2M_Testcases_CSE_Release_2.TC_CSE_SUB_DEL_002
+OneM2M_Testcases_CSE_Release_2.TC_CSE_SUB_DEL_003
+OneM2M_Testcases_CSE_Release_2.TC_CSE_ANNC_001_ACP_UPD
+OneM2M_Testcases_CSE_Release_2.TC_CSE_ANNC_001_ACP_CRE
+OneM2M_Testcases_CSE_Release_2.TC_CSE_ANNC_001_CNT_UPD
+OneM2M_Testcases_CSE_Release_2.TC_CSE_ANNC_001_CNT_CRE
+OneM2M_Testcases_CSE_Release_2.TC_CSE_ANNC_001_GRP_UPD
+OneM2M_Testcases_CSE_Release_2.TC_CSE_ANNC_001_GRP_CRE
+OneM2M_Testcases_CSE_Release_2.TC_CSE_ANNC_001_CIN_CRE
+
+&lt;span class=&quot;c&quot;&gt;# 위 목록은 타이탄 마스터 컨트롤에서 하나씩 테스트케이스를 실행 할때 필요함&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 빌드는 한번만 하여 생성 하면 종료 된다.  &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;2-cli-mode-실행&quot;&gt;2. CLI Mode 실행&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/tester/mc_cli_mode.png&quot; alt=&quot;runtime&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+1. 마스터 컨트롤 환경 설정 기반으로 실행  
+jskim@aisop_2_0:~/IdeaProjects/oneM2MTester&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mctr_cli oneM2MTester/Configs/oneM2MTesterConfig.cfg 
+ 
+
+&lt;span class=&quot;k&quot;&gt;*************************************************************************&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; TTCN-3 Test Executor - Main Controller 2                              &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; Version: CRL 113 200/6 R4A                                            &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; Copyright &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 2000-2018 Ericsson Telecom AB                           &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; All rights reserved. This program and the accompanying materials      &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; are made available under the terms of the Eclipse Public License v1.0 &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; which accompanies this distribution, and is available at              &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; http://www.eclipse.org/legal/epl-v10.html                             &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;*************************************************************************&lt;/span&gt;
+
+Using configuration file: oneM2MTester/Configs/oneM2MTesterConfig.cfg
+MC@aisop_2_0: Unix server socket created successfully.
+MC@aisop_2_0: Listening on TCP port 9580.
+MC2&amp;gt; cmtc
+Waiting &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;HC to connect...
+
+2. 마스터 컨트롤 접속 
+jskim@aisop_2_0:~/IdeaProjects/oneM2MTester/bin&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./oneM2MTester 127.0.0.1 9580 
+TTCN-3 Host Controller &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;parallel mode&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;, version CRL 113 200/6 R4A
+The address of MC was &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;to a &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;IP address. This may cause incorrect behavior &lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;a HC from a remote host also connects to MC.
+
+&lt;span class=&quot;c&quot;&gt;# 주의사항으로 oneM2MTester 실행시 반드시 바이너리 파일이 있는 곳에서 실행 한다. &lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 안그려면 oneM2M 테스트 케이스 실행시 테스트기 에서 보내는 리소스 정보의 속성값들이 shortname 이 변환이 안된다. &lt;/span&gt;
+ 
+MC@aisop_2_0: New HC connected from 127.0.0.1 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;127.0.0.1]. aisop_2_0: Linux 4.15.0-43-generic on x86_64.
+MC@aisop_2_0: Downloading configuration file to all HCs.
+MC@aisop_2_0: Configuration file was processed on all HCs.
+MC@aisop_2_0: Creating MTC on host 127.0.0.1.
+MC@aisop_2_0: MTC is created.
+
+3. 테스트 케이스 실행
+MC2&amp;gt; smtc OneM2M_Testcases_CSE_Release_1.TC_CSE_GEN_RET_001_CSR  
+...
+MTC@aisop_2_0: Test &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; TC_CSE_GEN_RET_001_CSR finished. Verdict: pass
+MC@aisop_2_0: Test execution finished.
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;참고&quot;&gt;참고&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/IoTKETI/oneM2MTester/blob/master/doc/oneM2MTester_User_Manual/oneM2MTester_User_Guide_ver2_1_0.pdf&quot;&gt;oneM2MTester 설치 메뉴얼&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>yeosong heo</name></author><category term="test" /><category term="eclipse" /><category term="java" /><summary type="html">1 CLI Mode 빌드 ```bash 테스트 케이스 소스 생성 jskim@aisop_2_0:~/IdeaProjects$ git https://github.com/IoTKETI/oneM2MTester.git jskim@aisop_2_0:~/IdeaProjects$ cd oneM2MTester jskim@aisop_2_0:~/IdeaProjects/oneM2MTester$ makefilegen -f -g -t oneM2MTester.tpd</summary></entry><entry><title type="html">IoTKETI/oneM2MTester 설치 하기</title><link href="http://0.0.0.0:4000/onem2m/2019/01/31/onem2m_tester_install.html" rel="alternate" type="text/html" title="IoTKETI/oneM2MTester 설치 하기" /><published>2019-01-31T00:00:00+09:00</published><updated>2019-01-31T00:00:00+09:00</updated><id>http://0.0.0.0:4000/onem2m/2019/01/31/onem2m_tester_install</id><content type="html" xml:base="http://0.0.0.0:4000/onem2m/2019/01/31/onem2m_tester_install.html">&lt;h1 id=&quot;배경&quot;&gt;배경&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;나는 IoTKETI/oneM2MTester 메뉴얼에 적힌 OS 환경이 달라 이력 사항으로 설치 이력을 아래와 같이 남긴다.  &lt;br /&gt;
+ 참고사항으로 IoTKETI/oneM2MTester 메뉴얼에 적힌 환경 정보는 &lt;strong&gt;Ubuntu 16.04&lt;/strong&gt; 기반이며 Titan Core 바이너리 또한 Ubuntu 16.04 기반만 배포 하고 있다. 
+ 만약 처음 설치 하시는 유저는 Ubuntu 16.04에 하는걸 권고한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;해당 툴을 처음 설치하는 분들게 설치에 도움이 되길 희망 한다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;1-설치-환경-정보&quot;&gt;1. 설치 환경 정보&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/tester/osinfo.png&quot; alt=&quot;os&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 환경 정보&lt;/span&gt;
+OS : Ubuntu 18.04 x86_64 , Linux 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h1 id=&quot;2-onem2mtester-runtime-environment&quot;&gt;2. oneM2MTester Runtime Environment&lt;/h1&gt;
+&lt;p&gt;테스트 환경을 설정 하기 하기 다음 4가지 설정이 필요하다.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Java 1.8 설치&lt;/li&gt;
+  &lt;li&gt;Eclipse 와 plugins install&lt;/li&gt;
+  &lt;li&gt;Titan Core install&lt;/li&gt;
+  &lt;li&gt;Configurations : Eclipse 설정&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;21-java-jdk-인스톨&quot;&gt;2.1. Java JDK 인스톨&lt;/h2&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;add-apt-repository ppa:openjdk-r/ppa
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get update
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;openjdk-8-jdk
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;22-eclipse-와-titan-plugins-install&quot;&gt;2.2 Eclipse 와 Titan plugins install&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/tester/eclipse_download.png&quot; alt=&quot;eclise&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;eclipse ide 2018-12 설치&lt;/li&gt;
+  &lt;li&gt;인스톨러에서 java developer 플러그인 설치&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/tester/titan_plugin_download.png&quot; alt=&quot;eclise&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;이클립스 타이탄 플러그인 설치 : 6.5.0 설치&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;23-titan-core-install&quot;&gt;2.3 Titan Core install&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/tester/titan_download.png&quot; alt=&quot;titan&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;6.4.0 소스 다운로드 후 소스 컴파일&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 타이탄 코어 소스 에 필요한 컴파일 도구 설치 &lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;build-essential
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;automake
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;g++ expect libssl-dev libxml2-dev libncurses5-dev flex bison
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;xutils-dev
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ant xsltproc
+
+&lt;span class=&quot;c&quot;&gt;# 빌드 소스 환경 만들기   &lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; ~/titan.core
+
+&lt;span class=&quot;c&quot;&gt;# 빌드 소스 다운로드  &lt;/span&gt;
+wget https://github.com/eclipse/titan.core/archive/6.4.0.tar.gz
+
+&lt;span class=&quot;c&quot;&gt;# 타이탄 소스 풀기 &lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;tar &lt;/span&gt;xvfz xvf 6.4.0.tar.gz &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; ~/titan.core/
+
+&lt;span class=&quot;c&quot;&gt;# 빌드 하기 위해 타이탄 소스로 이동  &lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/titan.core/titan.core-6.4.0
+
+&lt;span class=&quot;c&quot;&gt;# 빌드 바이너리 개인 설정 추가 &lt;/span&gt;
+~/titan.core/titan.core-6.4.0&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; Makefile.personal
+TTCN3_DIR :&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /home/jskim/titan.core/Install  
+XMLDIR :&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /usr
+OPENSSL_DIR :&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /usr
+JNI :&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; no
+
+&lt;span class=&quot;c&quot;&gt;# 빌드&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 소스 빌드 시간은 CPU 사양이 낮으면 1~2시간 소용된다. 여기에서는 약 10분내외로 컴파일 되었다.    &lt;/span&gt;
+~/titan.core/titan.core-6.4.0&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; 24
+~/titan.core/titan.core-6.4.0&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make all 
+~/titan.core/titan.core-6.4.0&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; 
+
+&lt;span class=&quot;c&quot;&gt;# 빌드 성공 후 확인  &lt;/span&gt;
+~/titan.core/titan.core-6.4.0/Install# &lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-lt&lt;/span&gt;
+drwxr-xr-x 3 xxx xxx 4096 Jan 31 09:40 man
+drwxr-xr-x 4 xxx xxx 4096 Jan 31 09:40 include
+drwxr-xr-x 2 xxx xxx 4096 Jan 31 09:40 lib
+drwxr-xr-x 5 xxx xxx 4096 Jan 31 09:40 etc
+drwxr-xr-x 2 xxx xxx 4096 Jan 31 09:40 bin
+drwxr-xr-x 5 xxx xxx 4096 Jan 31 09:40 &lt;span class=&quot;nb&quot;&gt;help
+&lt;/span&gt;drwxr-xr-x 2 xxx xxx 4096 Jan 31 09:40 demo
+
+&lt;span class=&quot;c&quot;&gt;# 타이탄 코어 실행을 위한 환경 설정 추가  &lt;/span&gt;
+~/.bashrc 파일 안에 다음 환경 설정 추가 
+...
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;TTCN3_DIR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/jskim/bin/titan.core
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;TTCN3_DIR&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;/bin:&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt; 
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LD_LIBRARY_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;TTCN3_DIR&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;/lib:&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LD_LIBRARY_PATH&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
+.. 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;24-이클립스-환경-설정&quot;&gt;2.4 이클립스 환경 설정&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;이클립스 에서 타이탄 코어 설치 위치 설정 
+&lt;img src=&quot;/assets/tester/eclipse_titan_config.png&quot; alt=&quot;titan_config&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;25-onem2mtester-테스터-소스-eclipse에-import&quot;&gt;2.5 oneM2Mtester 테스터 소스 Eclipse에 import&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# oneM2Mtester 소스 다운로드
+git https://github.com/IoTKETI/oneM2MTester.git 
+
+# local eclipse workspace에 해당 소스 workspace에 import  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;26-eclipse-자동-빌드-확인&quot;&gt;2.6 Eclipse 자동 빌드 확인&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/tester/onem2m_tester_builder.png&quot; alt=&quot;onem2m_titan_config&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;27-onem2m-환경-설정&quot;&gt;2.7 oneM2M 환경 설정&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;공식 메뉴얼에는 src &amp;gt; oneM2MTestConfig.cfg 파일을 시험기 환경 설정에 맞추어 설정 하라고 가이드 하고 있다.   
+아래 기본 설정들은 Mobius 에 맞추어 있다.
+ 
+[MAIN_CONTROLLER]
+# The options herein control the behavior of MC.
+TCPPort := 9580
+KillTimer := 10.0
+
+[LOGGING]
+LogFile 			:= &quot;../logs/%e.%h-%r.%s&quot;
+FileMask 			:= LOG_ALL | DEBUG | ERROR | USER | WARNING | TESTCASE | STATISTICS | MATCHING |VERDICTOP_SETVERDICT
+ConsoleMask 		:= TESTCASE | PORTEVENT | ERROR | STATISTICS | MATCHING | VERDICTOP_SETVERDICT | DEBUG
+LogSourceInfo 	    := Yes
+AppendFile 		    := No
+TimeStampFormat 	:= DateTime
+LogEventTypes 	    := Yes
+SourceInfoFormat 	:= Single
+LogEntityName 	    := Yes
+
+[TESTPORT_PARAMETERS]
+// mcaPort 
+system.mcaPort.defaultListeningPort				:= &quot;0&quot;               // Allow to use specific port number      
+system.mcaPort.map_behavior						:= &quot;connect&quot;  
+system.mcaPort.RemotePort						:= &quot;7579&quot;	  		 // SUT - Port
+system.mcaPort.RemoteHost						:= &quot;192.168.19.147&quot;   // SUT - IP    
+system.mcaPort.lazy_conn_id_handling			:= &quot;yes&quot;  
+system.mcaPort.debug                            := &quot;yes&quot;
+system.mcaPort.map_protocol                     := &quot;tcp&quot;
+
+// mccPort
+system.mccPort.defaultListeningPort				:= &quot;0&quot;  
+system.mccPort.map_behavior						:= &quot;connect&quot;  
+system.mccPort.RemotePort						:= &quot;7579&quot;	  		  // SUT - Port
+system.mccPort.RemoteHost						:= &quot;192.168.19.147&quot;   // SUT - IP    
+system.mccPort.lazy_conn_id_handling			:= &quot;yes&quot;  
+system.mccPort.debug                            := &quot;yes&quot;
+system.mcaPort.map_protocol                     := &quot;tcp&quot;
+
+// utPort, this port is used to perform the AE testing.
+system.utPort.defaultListeningPort				:= &quot;0&quot;  
+system.utPort.map_behavior						:= &quot;connect&quot;  
+system.utPort.RemotePort						:= &quot;3000&quot;	  		 // UpperTester - Port
+system.utPort.RemoteHost						:= &quot;192.168.19.147&quot;   // UpperTester - IP    
+system.utPort.lazy_conn_id_handling				:= &quot;yes&quot;  
+system.utPort.debug                             := &quot;yes&quot;  
+
+// mcaPortIn 
+system.mcaPortIn.defaultListeningPort			:= &quot;62590&quot;           // Allow to use specific port number      
+system.mcaPortIn.map_behavior					:= &quot;listen&quot;   
+system.mcaPortIn.debug                          := &quot;yes&quot;
+system.mcaPortIn.map_protocol                   := &quot;tcp&quot; 
+
+[MODULE_PARAMETERS]
+	
+#OneM2M_Constants.tsp_connectionParams 		:=  {&quot;{SUT-SERVER-IP}&quot;, Integer_port, &quot;TEST-SYSTEM-IP&quot;, Integer_port};
+OneM2M_Constants.tsp_connectionParams 		:=  {&quot;192.168.0.153&quot;, 7579, &quot;192.168.19.145&quot;, 27689};
+
+OneM2M_Pixits.PX_SERIALIZATION 				:= &quot;JSON&quot;; ## json or xml  
+-----------------------------&amp;gt; 시험기 데이타 타입 설정 
+OneM2M_Pixits.PX_PROTOCOL_BINDING 			:= &quot;HTTP&quot;; ## coap or http or mqtt 
+-----------------------------&amp;gt; 시험기 프로토콜 설정 
+
+OneM2M_Pixits.PX_RUN_POSTAMBLE 						:= true;
+    
+# SUT M2M-Service Provider ID
+OneM2M_Pixits.PX_SP_ID								:= &quot;//keti.re.kr&quot;; 
+-----------------------------&amp;gt; 시험기 절대 주소체계 설정
+   
+# Primtive scope could only either be 'e_cseRelative', 'e_spRelative', or 'e_absolute'
+OneM2M_Pixits.PX_PRIMITIVE_SCOPE					:= e_cseRelative; 
+-----------------------------&amp;gt; 시험기 주소체계 설정 
+    
+# Addressing format can only either be 'e_hierarchical' or 'e_nonHierarchical'
+OneM2M_Pixits.PX_ADDRESSING_METHOD 					:= e_hierarchical; 
+-----------------------------&amp;gt; 시험기 주소체계 설정
+
+
+OneM2M_Pics.PICS_STRUCTURED_CSE_RELATIVE_RESOURCE_ID_FORMAT 	:= true;	  // hierarcahial CSE-relative resource format support declaration
+// OneM2M_Pics.PICS_UNSTRUCTURED_CSE_RELATIVE_RESOURCE_ID_FORMAT 	:= false; // set to 'true' only when 'PX_ADDRESSING_METHOD' is set to 'e_nonHierarchical'
+    	
+OneM2M_Pics.PICS_ACP_SUPPORT 									:= true;
+OneM2M_Pics.PICS_IN_CSE 										:= true;	
+
+# Which component do you want to test (IN or MN)?
+OneM2M_Pixits.PX_IN_CSE	:= true;
+OneM2M_Pixits.PX_MN_CSE	:= false; 	
+OneM2M_Pixits.PX_ASN_CSE:= false; 
+
+# Checking utTrigger port for the automated testing
+OneM2M_Pixits.PX_UT_IMPLEMENTED := false;
+       
+# Parameter settings for the SUT
+OneM2M_Pixits.PX_CSE_ID						:= &quot;/Mobius&quot;;// SP-relative_CSE-ID;   
+--------------------&amp;gt; 시험기 CSE ID 설정
+OneM2M_Pixits.PX_CSE_NAME					:= &quot;Mobius&quot;; // CSEBase resource name 
+--------------------&amp;gt; 시험기 CSE Name 설정 
+OneM2M_Pixits.PX_CSE_RESOURCE_ID			:= &quot;Mobius&quot;; // CSE-relative_CSE-ID; 
+    
+OneM2M_Pixits.PX_SUT_ADDRESS				:= &quot;192.168.35.34:7579&quot;; 
+--------------------&amp;gt; IUT 주소 수정 
+OneM2M_Pixits.PX_AE1_ADDRESS				:= &quot;192.168.19.147:62590&quot;; // poa for notification url
+OneM2M_Pixits.PX_AE2_ADDRESS				:= &quot;192.168.19.147:62590&quot;; // poa for notification url
+
+	
+OneM2M_Pixits.PX_AE1_ID_STEM				:= &quot;C_AE_ID_STEM_1&quot;; // AE-ID-STEM has to start 'C' or 'S' 
+--------------------&amp;gt; 시험기 설정 
+OneM2M_Pixits.PX_AE2_ID_STEM				:= &quot;C_AE_ID_STEM_2&quot;; // AE-ID-STEM has to start 'C' or 'S'
+OneM2M_Pixits.PX_APP_ID 					:= &quot;0.2.481.2.0001.001.62590&quot;; 
+--------------------&amp;gt; 시험기 설정  
+    
+OneM2M_Pixits.PX_RESOURCES_TO_BE_DELETED 	:= {&quot;MyAe&quot;}; // {MyAe, MyAe2, ...}
+// OneM2M_Pixits.PX_RESOURCE_TO_BE_DELETED 	:= &quot;MyAe&quot;;
+    
+OneM2M_Pixits.PX_SUPER_AE_ID				:= &quot;/Superman&quot;; // Superuser, CSE Minimum Provisioning
+OneM2M_Pixits.PX_SUPER_CSE_ID				:= &quot;/Superman&quot;; 
+
+// &quot;all&quot; access control policy is used for a few testcases: 
+// TC_CSE_SEC_ACP_004 series, TC_CSE_DMR_UPD_016_CSR_ET, TC_CSE_DMR_UPD_016_CSR_RR
+// OneM2M_Pixits.PX_ACOR	 					:= {&quot;Mobius&quot;, &quot;/Mobius&quot;, &quot;C_AE_ID_STEM_1&quot;, &quot;C_AE_ID_STEM_2&quot;}; 
+OneM2M_Pixits.PX_ACOR                       := {&quot;all&quot;};
+
+OneM2M_Pixits.PX_ALLOWED_C_AE_IDS := {&quot;C-AllowedAPX_ACOReId&quot;};
+
+# These parameters are used for &amp;lt;remoteCSE&amp;gt;
+OneM2M_Pixits.PX_CSE1_ADDRESS				:= &quot;192.168.35.34:7579&quot;;
+OneM2M_Pixits.PX_CSE1_NAME 					:= &quot;Mobius&quot;;
+OneM2M_Pixits.PX_CSE1_ID 					:= &quot;/Mobius&quot;;
+
+# supportedResourceTypes check of SUT
+OneM2M_Pixits.PX_SRT := {int1, int2, int3, int4, int5, int9, int10, int13, int14, int16, int17, int23};
+OneM2M_Pixits.PX_POA := {&quot;http://192.168.19.147:7579&quot;};
+
+# Parameter that are not used for the moment (Designed for test location management)
+OneM2M_Pixits.PX_IS_LOC_CONTAINER			:= false;
+OneM2M_Pixits.PX_XML_NAMESPACE 				:= &quot;m2m=&quot;&quot;http://www.onem2m.org/xml/protocols&quot;&quot;&quot;;
+OneM2M_Pixits.PX_LOCATION_TARGET_ID			:= &quot;{LOCATION-TARGET-ID}&quot;; // SUPPOSE TO BE RECEIVED FROM LOCATION SERVER
+OneM2M_Pixits.PX_LOCATION_SERVER_ADDRESS	:= &quot;{LOCATION-SERVER-ADDRESS}&quot;;	
+OneM2M_Pixits.PX_LOCATION_UPDATE_PERIOD		:= &quot;PT10M10S&quot; ;// 10 Minute 10 Seconds
+OneM2M_Pixits.PX_LOCATION_CONTAINER_NAME	:= &quot;myLocContainer&quot;;
+ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;참고&quot;&gt;참고&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/IoTKETI/oneM2MTester/blob/master/doc/oneM2MTester_User_Manual/oneM2MTester_User_Guide_ver2_1_0.pdf&quot;&gt;oneM2MTester 설치 메뉴얼&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>yeosong heo</name></author><category term="test" /><category term="eclipse" /><category term="java" /><summary type="html">배경 나는 IoTKETI/oneM2MTester 메뉴얼에 적힌 OS 환경이 달라 이력 사항으로 설치 이력을 아래와 같이 남긴다. 참고사항으로 IoTKETI/oneM2MTester 메뉴얼에 적힌 환경 정보는 Ubuntu 16.04 기반이며 Titan Core 바이너리 또한 Ubuntu 16.04 기반만 배포 하고 있다. 만약 처음 설치 하시는 유저는 Ubuntu 16.04에 하는걸 권고한다. 해당 툴을 처음 설치하는 분들게 설치에 도움이 되길 희망 한다. 1. 설치 환경 정보</summary></entry><entry><title type="html">마이크로파이썬 네임태그 앱 이식 하기(IBM Developer Meetup 2018)</title><link href="http://0.0.0.0:4000/meetup/2019/01/27/IOTBadge.html" rel="alternate" type="text/html" title="마이크로파이썬 네임태그 앱 이식 하기(IBM Developer Meetup 2018)" /><published>2019-01-27T00:00:00+09:00</published><updated>2019-01-27T00:00:00+09:00</updated><id>http://0.0.0.0:4000/meetup/2019/01/27/IOTBadge</id><content type="html" xml:base="http://0.0.0.0:4000/meetup/2019/01/27/IOTBadge.html">&lt;h2 id=&quot;1-개발-환경-정보&quot;&gt;1. 개발 환경 정보&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; - Ubuntu 18.04 Destkop amd64  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;2-개발-환경-준비사항&quot;&gt;2. 개발 환경 준비사항&lt;/h2&gt;
+&lt;p&gt;picocom 설치&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  sudo apt-get install picocom   
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;webrepl 다운로드&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  git clone https://github.com/micropython/webrepl  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;developer-badge-2018-apps 다운로드&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  git clone https://github.com/IBM-Developer-Korea/developer-badge-2018-apps
+  developer-badge-2018-apps/apps/nametag 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;3-webrepl-cli-방식으로-업로드-수행&quot;&gt;3. webrepl CLI 방식으로 업로드 수행&lt;/h2&gt;
+
+&lt;p&gt;업로드를 수행 하기전 IOT뱃지와 같은 네트워크 대역대로 설정 하자. 
+참고로 IOT뱃지는 2.4HZ 기반만 Wifi만 지원 한다. 공유기가 2.4HZ를 지원하는지 체크 한다.&lt;/p&gt;
+
+&lt;p&gt;업로드 수행 방법은  CLI 방식과 Web 방식으로 하는 경우가 있는데 web 방식은 단점이 있어 CLI방식으로 사용했다.&lt;/p&gt;
+
+&lt;p&gt;Web 방식은 한번 보낸 후 같을 파일을 보내고자 할 경우 다른 파일을 선택 하고 다시 선택 한다. 강사님 말씀으로는 이게 버그란다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;vi&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;편집기를&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;오픈&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;하여&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;네임&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;태그&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;름&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;바꾸기&lt;/span&gt; 
+&lt;span class=&quot;n&quot;&gt;vi&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;developer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;badge&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2018&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;apps&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;apps&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nametag&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tagmain&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt;
+
+&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;ujson&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;uos&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;util&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;network&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;utime&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;urequests&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;ugfx&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt; 
+&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;home&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;styles&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; 
+&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TagMain&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt; 
+&lt;span class=&quot;mi&quot;&gt;13&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;IS_TEST&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt; 
+&lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;# Labels
+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'허여송'&lt;/span&gt;           &lt;span class=&quot;c1&quot;&gt;## 이미지 출력 하단 이름 변경 수정 
+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;17&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;org&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'(주)아이렉스넷'&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;## 이미지 출력 상단 이름 변경  수정 
+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt; 
+&lt;span class=&quot;mi&quot;&gt;19&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;# Nametag Image Server
+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'https://2018-devday-nametag.au-syd.mybluemix.net/nametag'&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;21&lt;/span&gt; 
+&lt;span class=&quot;mi&quot;&gt;22&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;23&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;# initialize ugfx
+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;ugfx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;25&lt;/span&gt; 
+&lt;span class=&quot;mi&quot;&gt;26&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;# Container
+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;27&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;width&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ugfx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;28&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;height&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ugfx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;29&lt;/span&gt;         &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;container&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ugfx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Container&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;styles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ibm_st&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt; 
+&lt;span class=&quot;mi&quot;&gt;31&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;# Status box
+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;32&lt;/span&gt;         &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;create_status_box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;33&lt;/span&gt; 
+&lt;span class=&quot;mi&quot;&gt;34&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;# Nametag Image
+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;35&lt;/span&gt;         &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filename&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'/nametag.gif'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 
+~/iot_sensor/src/webrepl/webrepl_cli.py &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; aaaa ~/iot_sensor/src/developer-badge-2018-apps/apps/nametag/__init__.py 192.168.2.21:/apps/nametag/ 
+op:put, host:192.168.2.21, port:8266, passwd:aaaa.
+/home/kranian/iot_sensor/src/developer-badge-2018-apps/apps/nametag/__init__.py -&amp;gt; /apps/nametag/__init__.py
+Remote WebREPL version: &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1, 9, 4&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Sent 107 of 107 bytes
+
+
+~/iot_sensor/src/webrepl/webrepl_cli.py &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; aaaa ~/iot_sensor/src/developer-badge-2018-apps/apps/nametag/tagmain.py 192.168.2.21:/apps/nametag/
+op:put, host:192.168.2.21, port:8266, passwd:aaaa.
+
+~/iot_sensor/src/developer-badge-2018-apps/apps/nametag/tagmain.py -&amp;gt; /apps/nametag/tagmain.py
+Remote WebREPL version: &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1, 9, 4&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Sent 3712 of 3712 bytes
+
+~/iot_sensor/src/webrepl/webrepl_cli.py &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; aaaa ~/iot_sensor/src/developer-badge-2018-apps/apps/nametag/app.json 192.168.2.21:/apps/nametag/ 
+op:put, host:192.168.2.21, port:8266, passwd:aaaa.
+~/src/developer-badge-2018-apps/apps/nametag/app.json -&amp;gt; /apps/nametag/app.json
+Remote WebREPL version: &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1, 9, 4&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Sent 71 of 71 bytes
+
+
+
+여기서 주의사항은 파일 전송시 원격 호스트의 디렉토리 입력시 /app/nametag , /app/nametag/ 하고 차이가 있다.
+
+/app/nametag : 로컬 파일을 다른 파일이름&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;nametag&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;로 전송
+/app/nametag/ : 로컬 파일을 nametag 디렉토리로 전송 한다는 의미
+
+이 차이점을 꼭 이해 하자   
+ 
+   
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;4시리얼-연결-후-디렉토리-조회-명령으로-정상-업로드-여부-확인&quot;&gt;4.시리얼 연결 후 디렉토리 조회 명령으로 정상 업로드 여부 확인&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo picocom -b 115200 -r -l /dev/ttyUSB0  
+&amp;gt;&amp;gt;&amp;gt; uos.listdir('/apps/nametag')
+['tagmain.py', '__init__.py', 'app.json']
+&amp;gt;&amp;gt;&amp;gt; run('tagmain')
+Restrt to run app tagmain
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;5재부팅-후-앱-실행&quot;&gt;5.재부팅 후 앱 실행&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;I (1773) network: CONNECTED
+[Errno 2] ENOENT
+nametag image file (/nametag.gif) loading failure
+&lt;span class=&quot;gd&quot;&gt;---open_status_box---
+---set_status_text---:Wait for network
+&lt;/span&gt;I (3623) event: sta ip: 192.168.2.21, mask: 255.255.255.0, gw: 192.168.2.1
+I (3623) network: GOT_IP
+&lt;span class=&quot;gd&quot;&gt;---set_status_text---:Network is ready
+---set_status_text---:Your device ID is 240AC423C8FC
+&lt;/span&gt;
+몇분 후 Network을 통해 이미지를 가져와 이미지를 출력한다.   
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;6결과&quot;&gt;6.결과&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/catpure/iot_nametag.jpg&quot; alt=&quot;nametag&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;7-행사-참여-후기&quot;&gt;7. 행사 참여 후기&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;이식만 하는데 파일 전송 부분에서 삽질 했다. 해결 과정은 페이북에 공개된 강사 분들의 영상을 보고 문제를 해결 했다.&lt;/li&gt;
+  &lt;li&gt;IOT 뱃지 하드웨어,펌웨어,앱을 공개해 주신 IBM 디벨로퍼 애드보케이트(Developer Advocate팀)에 감사드린다.&lt;/li&gt;
+  &lt;li&gt;마지막으로 IBM 공진기 에반젤리스트님은 전체 프로젝트의 개념과 과정을 앞으로 해당 프로젝트가 사용자들 간의 사용 후기와 해당 오픈 프로젝트가 활성화되었으면 좋겠다고 했다.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>yeosong heo</name></author><category term="iot" /><category term="micropython" /><summary type="html">1. 개발 환경 정보 - Ubuntu 18.04 Destkop amd64 2. 개발 환경 준비사항 picocom 설치 sudo apt-get install picocom webrepl 다운로드</summary></entry><entry><title type="html">스카우터 페이퍼 토폴로지 그룹핑 텍스트 중복 현상 수정</title><link href="http://0.0.0.0:4000/github/2019/01/24/Scouter-Papaper.html" rel="alternate" type="text/html" title="스카우터 페이퍼 토폴로지 그룹핑 텍스트 중복 현상 수정" /><published>2019-01-24T00:00:00+09:00</published><updated>2019-01-24T00:00:00+09:00</updated><id>http://0.0.0.0:4000/github/2019/01/24/Scouter%20Papaper</id><content type="html" xml:base="http://0.0.0.0:4000/github/2019/01/24/Scouter-Papaper.html">&lt;p&gt;&lt;a href=&quot;https://github.com/scouter-contrib/scouter-paper/issues/114&quot;&gt;스카우터 페이퍼 이슈 #114&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;지난해 10월경 스카우터 메일링 리스트에서 gunlee01 님이 리뷰 요청하는 글을 봤다. 이슈는 내용은 토폴로지 차트가 움직이면 
+중복으로 텍스트가 나타는 현상이었다.&lt;/li&gt;
+  &lt;li&gt;이전에도 이런 비슷한 경험을 해본 적이 있어 해당 프로젝트에 이슈 분석을 도전을 해봤다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/catpure/gihtub_scouter-paper.png&quot; alt=&quot;issue&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;1-수정&quot;&gt;1. 수정&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;왜 이런 현상 발생 하는지 재현 테스트를 시도 해봤다.
+    &lt;ol&gt;
+      &lt;li&gt;일단 중복으로 텍스트가 나오는 클래스의 이름을 찾아봤다. 
+&lt;img src=&quot;/assets/catpure/gihtub_scouter-paper1.png&quot; alt=&quot;issue2&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;CSS 클래스명이 .node-inst-count 확인했고 해당 클래스로 조작하는 소스를 찾아 수정 시도했다.&lt;/li&gt;
+      &lt;li&gt;의심 되는 대상을 찾아 d3 속성 class 이름 값 .node-inst-count -&amp;gt; node-inst-count 수정&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;2-원인&quot;&gt;2. 원인&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;그럼 왜 이런 현상 발생했을까? 이는 간단했다. d3 텍스트 렌더링 속성에 설정을 잘못 해 발생한 것으로 파악됐다.&lt;/li&gt;
+  &lt;li&gt;API 문서를 체크 해 보니  일반적인 설정이 아래와 같았다. 
+&lt;img src=&quot;/assets/catpure/gihtub_scouter-paper2.png&quot; alt=&quot;issue3&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;3-소스-수정-후-풀-리퀘스-요청&quot;&gt;3. 소스 수정 후 풀 리퀘스 요청&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/catpure/gihtub_scouter-paper3.png&quot; alt=&quot;issue4&quot; /&gt; 
+&lt;img src=&quot;/assets/catpure/gihtub_scouter-paper4.png&quot; alt=&quot;issue5&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;리퀘스 수락 되어 머지가 되었다. &lt;a href=&quot;https://github.com/scouter-contrib/scouter-paper/pull/116/files&quot;&gt;풀리퀘스트내역 #114&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;4-후기&quot;&gt;4. 후기&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;분석 시간만 소요됐고 그외에 소스 수정은 많지는 않았다.&lt;/li&gt;
+  &lt;li&gt;항상 느끼는 거지만 이슈 재현만 된다면 문제 되는 지점을 찾는 것은 시간과의 싸움인 것 같다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;참고&quot;&gt;참고&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://wayhome25.github.io/git/2017/07/08/git-first-pull-request-story&quot;&gt;github풀리퀘스 하는 방법&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>yeosong heo</name></author><category term="issue,review" /><summary type="html">스카우터 페이퍼 이슈 #114 지난해 10월경 스카우터 메일링 리스트에서 gunlee01 님이 리뷰 요청하는 글을 봤다. 이슈는 내용은 토폴로지 차트가 움직이면 중복으로 텍스트가 나타는 현상이었다. 이전에도 이런 비슷한 경험을 해본 적이 있어 해당 프로젝트에 이슈 분석을 도전을 해봤다.</summary></entry><entry><title type="html">통합 플랫폼 UI 개발 목표 지표</title><link href="http://0.0.0.0:4000/onem2m/2019/01/22/GWP_UI.html" rel="alternate" type="text/html" title="통합 플랫폼 UI 개발 목표 지표" /><published>2019-01-22T00:00:00+09:00</published><updated>2019-01-22T00:00:00+09:00</updated><id>http://0.0.0.0:4000/onem2m/2019/01/22/GWP_UI</id><content type="html" xml:base="http://0.0.0.0:4000/onem2m/2019/01/22/GWP_UI.html">&lt;h1 id=&quot;3-통합-플랫폼--ui-동작-환경-개발&quot;&gt;3. 통합 플랫폼  UI 동작 환경 개발&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;아래 OS 플랫폼에서 동작 확인
+    &lt;ul&gt;
+      &lt;li&gt;윈도우즈&lt;/li&gt;
+      &lt;li&gt;리눅스&lt;/li&gt;
+      &lt;li&gt;안드로이드&lt;/li&gt;
+      &lt;li&gt;IOS&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;8플랫폼-응답-속도&quot;&gt;8.플랫폼 응답 속도&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;시험 환경 준비 
+&lt;img src=&quot;/assets/gwp/2.cert.png&quot; alt=&quot;env1&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;GWP: 테스트 횟수 총 5회 시도
+    &lt;ul&gt;
+      &lt;li&gt;목표 : 통합플랫폼UI에서 Create 요청 후 3초 이내에 응답이 와야함
+&lt;img src=&quot;/assets/gwp/1.cert.png&quot; alt=&quot;env2&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;테스트 준비
+        &lt;ol&gt;
+          &lt;li&gt;저장소 생성 : 0.2.481.1.999.1.2.3.Cert
+            &lt;ul&gt;
+              &lt;li&gt;resource address : /base/SAE-0.2.481.1.999.1.2.3.Cert/cnt-0.2.481.1.999.1.2.3.Cert&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;테스트 시작 
+&lt;img src=&quot;/assets/gwp/3.record.png&quot; alt=&quot;env3&quot; /&gt;
+        &lt;ol&gt;
+          &lt;li&gt;0.2.481.1.999.1.2.3.Cert &lt;cnt&gt; 자식 리소스 &lt;cin&gt; 생성 / 총 5번 수행&lt;/cin&gt;&lt;/cnt&gt;&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;테스트 근거 자료
+        &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;mi&quot;&gt;2019&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;01&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;21&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;59&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;904&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INFO&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8087&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;controller&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ResourceController&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;138&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;start&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;http:&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//220.123.184.53:8080/base/SAT-kranian1&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;2019&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;01&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;21&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;59&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;953&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INFO&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8087&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;util&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;OkHttpFactoryUtil&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;$HttpLogger&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;127&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;+-------------------------------------------------------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;POST&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;http:&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//220.123.184.53:8080/base/SAT-kranian1&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Content&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;Type:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;application&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;charset&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;utf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Content&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;Length:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;29&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;M2M&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;Origin:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kranian2&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;M2M&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;RI:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AiSOP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ddf02679d932e12857b8c2d883193e04f9e5fab&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;Accept:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;application&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;m2m:cnt&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;rn&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;kranian2&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;END&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;POST&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;29&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;--&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;201&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Created&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;http:&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//220.123.184.53:8080/base/SAT-kranian1 (47ms)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;Server:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Apache&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Coyote&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.1&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;M2M&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;RSC:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2001&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;M2M&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;RI:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AiSOP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ddf02679d932e12857b8c2d883193e04f9e5fab&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Content&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;Location:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;incse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;base&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SAT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kranian1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kranian2&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;M2M&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;Origin:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;incse&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;M2M&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;OT:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20190121&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T160501&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Content&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;Type:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;application&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Content&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;Length:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;223&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;Date:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Mon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;21&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Jan&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2019&lt;/span&gt; &lt;span class=&quot;mo&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;01&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GMT&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;m2m:cnt&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;rn&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;kranian2&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ty&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ri&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/incse/63d0FNATEne8SqXOYB2Lte&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;pi&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/incse/SSAT-kranian1&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ct&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;20190121T160501&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;lt&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;20190121T160501&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;et&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;99991231T235959&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;st&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cr&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;kranian2&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;mia&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2592000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cni&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cbs&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;--&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;END&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;HTTP&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;223&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;+-------------------------------------------------------&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;2019&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;01&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;21&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;59&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;953&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INFO&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8087&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;controller&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ResourceController&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;142&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;end&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;duration&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;49&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ms&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;와이어 샤크 근거 자료 사용&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>yeosong heo</name></author><category term="ux,test,performance" /><summary type="html">3. 통합 플랫폼 UI 동작 환경 개발 아래 OS 플랫폼에서 동작 확인 윈도우즈 리눅스 안드로이드 IOS 8.플랫폼 응답 속도 시험 환경 준비</summary></entry><entry><title type="html">Mobius 연동 테스트</title><link href="http://0.0.0.0:4000/onem2m/2019/01/21/GWP.html" rel="alternate" type="text/html" title="Mobius 연동 테스트" /><published>2019-01-21T00:00:00+09:00</published><updated>2019-01-21T00:00:00+09:00</updated><id>http://0.0.0.0:4000/onem2m/2019/01/21/GWP</id><content type="html" xml:base="http://0.0.0.0:4000/onem2m/2019/01/21/GWP.html">&lt;h1 id=&quot;1-registration&quot;&gt;1. Registration&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/gwp/1.reg.png&quot; alt=&quot;reg&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;2-dmr&quot;&gt;2. DMR&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/gwp/2.dmr.png&quot; alt=&quot;dmr&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;3-discovery&quot;&gt;3. Discovery&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/gwp/3.dis.png&quot; alt=&quot;dis&quot; /&gt;&lt;/p&gt;
+&lt;h1 id=&quot;4-group&quot;&gt;4. Group&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/gwp/4.group.png&quot; alt=&quot;grp&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;5-subscription--notification&quot;&gt;5. Subscription &amp;amp; Notification&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/gwp/5.subs.png&quot; alt=&quot;subs&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;6-access-control-policy&quot;&gt;6. Access Control Policy&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/gwp/6.acp.png&quot; alt=&quot;acp&quot; /&gt;&lt;/p&gt;</content><author><name>yeosong heo</name></author><category term="analysis" /><summary type="html">1. Registration 2. DMR</summary></entry><entry><title type="html">흔한 언어팩 만들기</title><link href="http://0.0.0.0:4000/frontend/2019/01/17/How-To-LackPack-Impl.html" rel="alternate" type="text/html" title="흔한 언어팩 만들기" /><published>2019-01-17T00:00:00+09:00</published><updated>2019-01-17T00:00:00+09:00</updated><id>http://0.0.0.0:4000/frontend/2019/01/17/How-To%20LackPack%20Impl</id><content type="html" xml:base="http://0.0.0.0:4000/frontend/2019/01/17/How-To-LackPack-Impl.html">&lt;h2 id=&quot;1-지역화-하기-위해-if문을-이용한-언어설정&quot;&gt;1. 지역화 하기 위해 if문을 이용한 언어설정&lt;/h2&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;isEnglish&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;en-US&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;브라우저 언어 감지 값&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
+    &lt;span class=&quot;nx&quot;&gt;message&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;en&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;MESSAGE&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;메세지&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/script&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;장점 : 빠르게 언어 팩 설정을 할수 있음&lt;/li&gt;
+  &lt;li&gt;단점 : 다른 언어의 확장성이 없고, 소스에 들어가 있기 때문에 수정시 오타를 주의 해야 한다.&lt;/li&gt;
+  &lt;li&gt;내 경험을 빌리자면 소스 수정 자체가 괴롭다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;2-파일-방식의-지역화&quot;&gt;2. 파일 방식의 지역화&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;file 명 : en.message 
+message=MESSAGE
+
+file 명 : ko.message 
+message=메세지
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;장점 : 규격화된 메시지를 파일 형태로 로컬 파일에 저장&lt;/li&gt;
+  &lt;li&gt;단점 : 언어 별 메시지 방식이기 때문에 혼자 만들때는 적합 하지 않을지도 모른다. 관리 언어 파일이 많아 지면 언어 코드 관리 혼자 감당 하기 
+ 힘들다.&lt;/li&gt;
+  &lt;li&gt;오픈 소스가 해당 방식을 이용하고 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;3-db-방식의-지역화&quot;&gt;3. DB 방식의 지역화&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- format : 
+{
+ '언어팩 코드' : '메세지'
+}
+- 구현 
+{
+ 'T_ALERT_USER_MESSAGE' : 'MESSAGE'
+}
+
+DB에 저장시에는 기본 언어 코드를 en으로 저장 
+
+기본 메시지 코드를 프론트엔드에 심고 프론트엔드에 적용 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;DB 레코드 셋을 언어코드,메시지 코드, 번역 구조화하고 저장&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;장점 : 기본 언어 팩 설정 후 다른 언어 확장이 쉬움&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;단점 : DB 응답 늦으면 사용하기가 어렵다. 
+ 혼자 진행할 때 이 방식을 사용했는데 맨 처음 기본 언어 셋을 실제 적용 할때만 상세하게 다시 체크 했다. 
+ 그 이후부터는 구글 번역기와 구글 엑셀 시트에 활용해 지역화를 만들었다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;저장 예시
+&lt;img src=&quot;/assets/catpure/langpack_list1.png&quot; alt=&quot;Langpack&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;언어 별 가공 후  예시 
+&lt;img src=&quot;/assets/catpure/langpack_list2.png&quot; alt=&quot;Langpack&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>yeosong heo</name></author><category term="Language" /><summary type="html">1. 지역화 하기 위해 if문을 이용한 언어설정 &amp;lt;script&amp;gt; boolean isEnglish = &quot;en-US&quot; === &quot;브라우저 언어 감지 값&quot;; message = en ? &quot;MESSAGE&quot; : &quot;메세지&quot;; alert(message); &amp;lt;/script&amp;gt; 장점 : 빠르게 언어 팩 설정을 할수 있음 단점 : 다른 언어의 확장성이 없고, 소스에 들어가 있기 때문에 수정시 오타를 주의 해야 한다. 내 경험을 빌리자면 소스 수정 자체가 괴롭다.</summary></entry><entry><title type="html">TCPDump 치트 키</title><link href="http://0.0.0.0:4000/linux/2019/01/16/TCPDump.html" rel="alternate" type="text/html" title="TCPDump 치트 키" /><published>2019-01-16T00:00:00+09:00</published><updated>2019-01-16T00:00:00+09:00</updated><id>http://0.0.0.0:4000/linux/2019/01/16/TCPDump</id><content type="html" xml:base="http://0.0.0.0:4000/linux/2019/01/16/TCPDump.html">&lt;h1 id=&quot;command&quot;&gt;Command&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;TCPDump 분석을 해야할 경우 아래와 같이 덤프 명령어를 사용함
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tcpdump &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; : display all available interfaces
+tcpdump &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; eth0 : capture traffic at the interface “eth0”
+tcpdump &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; any : capture traffic at any interface
+tcpdump &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; wlan0 port 80 : capture traffic at the interface “wlan0” on port 80
+tcpdump &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; wlan0 &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; 5 : capture 5 packets at the interface “wlan0”
+tcpdump &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; wlan0 tcp : capture only tcp traffic at interface “wlan0”
+tcpdump &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; wlan0 src 192.168.1.1 : capture traffic at interface “wlan0” with &lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;IP 192.168.1.1
+tcpdump &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; wlan0 dst 192.168.1.1 : capture traffic at interface “wlan0” with destination IP 192.168.1.1
+tcpdump src port 22 and dst host 1.2.3.4 : tcpdump &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;with boolean opertators
+tcpdump &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; wlan0 &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; 65535 : capture traffic with snapshot size as 65535 bytes, by default its 262144 bytes. Older versions of tcpdump captures 68 or 96 bytes.
+tcpdump &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; wlan0 &lt;span class=&quot;nt&quot;&gt;-w&lt;/span&gt; dump.pcap : capture traffic at the interface “wlan0” and write into a pcap file
+tcpdump &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; dump.pcap : &lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;captured file &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;we can use wireshark instead and its preferred&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+tcpdump &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &amp;lt;interface&amp;gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; 65535 &lt;span class=&quot;nt&quot;&gt;-w&lt;/span&gt; &amp;lt;some-file&amp;gt;.pcap
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;참고-문헌&quot;&gt;참고 문헌&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/@eranda/analyze-tcp-dumps-a089c2644f19&quot;&gt;TCP덤프분석&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>yeosong heo</name></author><category term="Network" /><category term="Packet" /><summary type="html">Command TCPDump 분석을 해야할 경우 아래와 같이 덤프 명령어를 사용함 tcpdump -D : display all available interfaces tcpdump -i eth0 : capture traffic at the interface “eth0” tcpdump -i any : capture traffic at any interface tcpdump -i wlan0 port 80 : capture traffic at the interface “wlan0” on port 80 tcpdump -i wlan0 -c 5 : capture 5 packets at the interface “wlan0” tcpdump -i wlan0 tcp : capture only tcp traffic at interface “wlan0” tcpdump -i wlan0 src 192.168.1.1 : capture traffic at interface “wlan0” with source IP 192.168.1.1 tcpdump -i wlan0 dst 192.168.1.1 : capture traffic at interface “wlan0” with destination IP 192.168.1.1 tcpdump src port 22 and dst host 1.2.3.4 : tcpdump command with boolean opertators tcpdump -i wlan0 -s 65535 : capture traffic with snapshot size as 65535 bytes, by default its 262144 bytes. Older versions of tcpdump captures 68 or 96 bytes. tcpdump -i wlan0 -w dump.pcap : capture traffic at the interface “wlan0” and write into a pcap file tcpdump -r dump.pcap : read captured file (we can use wireshark instead and its preferred) tcpdump -i &amp;lt;interface&amp;gt; -s 65535 -w &amp;lt;some-file&amp;gt;.pcap</summary></entry><entry><title type="html">나라별 코드 언어 조사</title><link href="http://0.0.0.0:4000/frontend/2019/01/15/LackPack.html" rel="alternate" type="text/html" title="나라별 코드 언어 조사" /><published>2019-01-15T00:00:00+09:00</published><updated>2019-01-15T00:00:00+09:00</updated><id>http://0.0.0.0:4000/frontend/2019/01/15/LackPack</id><content type="html" xml:base="http://0.0.0.0:4000/frontend/2019/01/15/LackPack.html">&lt;h1 id=&quot;사용-조사&quot;&gt;사용 조사&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;이란 : 페르시아어 사용 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%ED%8E%98%EB%A5%B4%EC%8B%9C%EC%95%84%EC%96%B4&quot;&gt;위키:이란어&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;인도네시아 : 인니어 사용 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%9D%B8%EB%8F%84%EB%84%A4%EC%8B%9C%EC%95%84%EC%96%B4&quot;&gt;위키:이니어&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;알제리 : 아랍어 사용 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%95%8C%EC%A0%9C%EB%A6%AC&quot;&gt;위키:아랍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;검색-결과&quot;&gt;검색 결과&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/catpure/dz_code.png&quot; alt=&quot;이란&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;    &lt;br /&gt;
+&lt;img src=&quot;/assets/catpure/inde_code.png&quot; alt=&quot;인도네시아&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;
+&lt;img src=&quot;/assets/catpure/iran_code.png&quot; alt=&quot;알제리&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;나라별 랭귀지 코드
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.iso.org/obp/ui/#search&quot;&gt;ISO기구 참고&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>yeosong heo</name></author><category term="Language" /><summary type="html">사용 조사 이란 : 페르시아어 사용 위키:이란어 인도네시아 : 인니어 사용 위키:이니어 알제리 : 아랍어 사용 위키:아랍</summary></entry><entry><title type="html">Git 커밋 메시지 Emoji</title><link href="http://0.0.0.0:4000/git/2019/01/14/GITCommitEmoji.html" rel="alternate" type="text/html" title="Git 커밋 메시지 Emoji" /><published>2019-01-14T00:00:00+09:00</published><updated>2019-01-14T00:00:00+09:00</updated><id>http://0.0.0.0:4000/git/2019/01/14/GITCommitEmoji</id><content type="html" xml:base="http://0.0.0.0:4000/git/2019/01/14/GITCommitEmoji.html">&lt;p&gt;이상한 모임 블로그 Atom Git 커밋메시지 에서 Git 메시지에 Emoji를 사용했더니 구분이 돼서 좋다고 하셔서 확인.
+해당 내용을 현재 진행 하는 소스 커밋에 반영해봤다. 해당 프로젝트 버그 내용을 확인 후 Git Commit에 
+Emogij를 입력하고 원격 저장소에 푸쉬 했다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;입력
+    &lt;ul&gt;
+      &lt;li&gt;입력 포맷은 앞에 Emoji Text 값을 넣고 수정한 내용을 간략히 쓴다.
+        &lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;:bug: xxxxx..   
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;결과 &lt;br /&gt;
+&lt;img src=&quot;/assets/catpure/git_emoji.png&quot; alt=&quot;Github&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;적용해 본 결과 귀여운 아이콘이 커밋 메시지 앞에 붙였다.&lt;/p&gt;
+
+&lt;p&gt;Git 메시지가 누적이 되면 어느 규칙적인 패턴이 들어와야 하는데 사람 마다 다르게 표현하므로 이렇게 이모지 아이콘으로 표현하면 Git 메세지 구분 하는데
+좋을 것 같다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;출처
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://blog.weirdx.io/post/58412&quot;&gt;Atom Git 커밋메시지-이상한모임&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://gist.github.com/parmentf/035de27d6ed1dce0b36a&quot;&gt;GitEmoji&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>yeosong heo</name></author><category term="VersionControl" /><summary type="html">이상한 모임 블로그 Atom Git 커밋메시지 에서 Git 메시지에 Emoji를 사용했더니 구분이 돼서 좋다고 하셔서 확인. 해당 내용을 현재 진행 하는 소스 커밋에 반영해봤다. 해당 프로젝트 버그 내용을 확인 후 Git Commit에 Emogij를 입력하고 원격 저장소에 푸쉬 했다.</summary></entry></feed>

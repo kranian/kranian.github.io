@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      Yeo Song Blog &middot; Daily Developer
+    
+  </title>
+
+  
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+  <script id="dsq-count-scr" src="//{ site.disqus.shortname }}.disqus.com/count.js" async></script>
+
+  <body class="index home">
+
+    <div id="sidebar">
+  <header>
+    <h1 class="site-title">
+      <a href="/">
+        
+        Yeo Song Blog
+      </a>
+    </h1>
+    <p class="lead"></p>
+  </header>
+  <nav id="sidebar-nav-links">
+  
+    <a class="home-link  active"
+        href="/">Home</a>
+  
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/about.html">About</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/analysis.html">Analysis</a>
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/frentend.html">FrontEnd</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/linux.html">Linux</a>
+    
+  
+
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/oneM2M.html">onem2m</a>
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/performance.html">Performance</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/springboot.html">Springboot</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/work.html">Work</a>
+    
+  
+
+  
+
+  
+    
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+  
+
+  <a id="subscribe-link"
+     class="icon" title="Subscribe" aria-label="Subscribe"
+     href="/feed.xml">
+    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+  </a>
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+    <a id="search-link"
+       class="icon"
+       title="Search" aria-label="Search"
+       href="/search.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+    </a>
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+
+  <p>
+  &copy; 2019.
+  <a href="/LICENSE.md">MIT License.</a>
+</p>
+
+</div>
+
+    <main class="container">
+      <div class="content">
+  
+
+
+  
+
+  
+  <article class="post-body">
+    <h2 class="post-title">
+      <a href="/onem2m/2019/01/31/onem2m_tester_install.html">
+        IoTKETI/oneM2MTester 설치 하기
+      </a>
+    </h2>
+    <div class="post-meta">
+  <span class="post-date">31 Jan 2019</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        <a href="/category/oneM2M.html">
+          onem2m
+        </a>
+      
+    
+  </span>
+</div>
+
+
+    
+      <h1 id="배경">배경</h1>
+<ul>
+  <li>
+    <p>나는 IoTKETI/oneM2MTester 메뉴얼에 적힌 OS 환경이 달라 이력 사항으로 설치 이력을 아래와 같이 남긴다.  <br />
+ 참고사항으로 IoTKETI/oneM2MTester 메뉴얼에 적힌 환경 정보는 <strong>Ubuntu 16.04</strong> 기반이며 Titan Core 바이너리 또한 Ubuntu 16.04 기반만 배포 하고 있다. 
+ 만약 처음 설치 하시는 유저는 Ubuntu 16.04에 하는걸 권고한다.</p>
+  </li>
+  <li>
+    <p>해당 툴을 처음 설치하는 분들게 설치에 도움이 되길 희망 한다.</p>
+  </li>
+</ul>
+
+<h1 id="1-설치-환경-정보">1. 설치 환경 정보</h1>
+<p><img src="/assets/tester/osinfo.png" alt="os" /></p>
+
+
+    
+
+    
+      
+      
+      
+
+      
+        <a href="/onem2m/2019/01/31/onem2m_tester_install.html">More &hellip;</a>
+      
+    
+  </article>
+  
+  <article class="post-body">
+    <h2 class="post-title">
+      <a href="/onem2m/2019/01/31/onem2m_tester_cli.html">
+        IoTKETI/oneM2MTester CLI 모드로 실행 하기
+      </a>
+    </h2>
+    <div class="post-meta">
+  <span class="post-date">31 Jan 2019</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        <a href="/category/oneM2M.html">
+          onem2m
+        </a>
+      
+    
+  </span>
+</div>
+
+
+    
+      <h3 id="1-cli-mode-빌드">1 CLI Mode 빌드</h3>
+<p>```bash</p>
+<h1 id="테스트-케이스-소스-생성">테스트 케이스 소스 생성</h1>
+<p>jskim@aisop_2_0:~/IdeaProjects$ git https://github.com/IoTKETI/oneM2MTester.git
+jskim@aisop_2_0:~/IdeaProjects$ cd oneM2MTester 
+jskim@aisop_2_0:~/IdeaProjects/oneM2MTester$ makefilegen -f -g -t oneM2MTester.tpd</p>
+
+
+    
+
+    
+      
+      
+      
+
+      
+        <a href="/onem2m/2019/01/31/onem2m_tester_cli.html">More &hellip;</a>
+      
+    
+  </article>
+  
+  <article class="post-body">
+    <h2 class="post-title">
+      <a href="/meetup/2019/01/27/IOTBadge.html">
+        마이크로파이썬 네임태그 앱 이식 하기(IBM Developer Meetup 2018)
+      </a>
+    </h2>
+    <div class="post-meta">
+  <span class="post-date">27 Jan 2019</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        meetup
+      
+    
+  </span>
+</div>
+
+
+    
+      <h2 id="1-개발-환경-정보">1. 개발 환경 정보</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> - Ubuntu 18.04 Destkop amd64  
+</code></pre></div></div>
+
+<h2 id="2-개발-환경-준비사항">2. 개발 환경 준비사항</h2>
+<p>picocom 설치</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  sudo apt-get install picocom   
+</code></pre></div></div>
+<p>webrepl 다운로드</p>
+
+
+    
+
+    
+      
+      
+      
+
+      
+        <a href="/meetup/2019/01/27/IOTBadge.html">More &hellip;</a>
+      
+    
+  </article>
+  
+  <article class="post-body">
+    <h2 class="post-title">
+      <a href="/github/2019/01/24/Scouter-Papaper.html">
+        스카우터 페이퍼 토폴로지 그룹핑 텍스트 중복 현상 수정
+      </a>
+    </h2>
+    <div class="post-meta">
+  <span class="post-date">24 Jan 2019</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        github
+      
+    
+  </span>
+</div>
+
+
+    
+      <p><a href="https://github.com/scouter-contrib/scouter-paper/issues/114">스카우터 페이퍼 이슈 #114</a></p>
+
+<ul>
+  <li>지난해 10월경 스카우터 메일링 리스트에서 gunlee01 님이 리뷰 요청하는 글을 봤다. 이슈는 내용은 토폴로지 차트가 움직이면 
+중복으로 텍스트가 나타는 현상이었다.</li>
+  <li>이전에도 이런 비슷한 경험을 해본 적이 있어 해당 프로젝트에 이슈 분석을 도전을 해봤다.</li>
+</ul>
+
+<p><img src="/assets/catpure/gihtub_scouter-paper.png" alt="issue" /></p>
+
+
+    
+
+    
+      
+      
+      
+
+      
+        <a href="/github/2019/01/24/Scouter-Papaper.html">More &hellip;</a>
+      
+    
+  </article>
+  
+  <article class="post-body">
+    <h2 class="post-title">
+      <a href="/onem2m/2019/01/22/GWP_UI.html">
+        통합 플랫폼 UI 개발 목표 지표
+      </a>
+    </h2>
+    <div class="post-meta">
+  <span class="post-date">22 Jan 2019</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        <a href="/category/oneM2M.html">
+          onem2m
+        </a>
+      
+    
+  </span>
+</div>
+
+
+    
+      <h1 id="3-통합-플랫폼--ui-동작-환경-개발">3. 통합 플랫폼  UI 동작 환경 개발</h1>
+<ul>
+  <li>아래 OS 플랫폼에서 동작 확인
+    <ul>
+      <li>윈도우즈</li>
+      <li>리눅스</li>
+      <li>안드로이드</li>
+      <li>IOS</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="8플랫폼-응답-속도">8.플랫폼 응답 속도</h1>
+<ul>
+  <li>시험 환경 준비 
+<img src="/assets/gwp/2.cert.png" alt="env1" /></li>
+</ul>
+
+
+    
+
+    
+      
+      
+      
+
+      
+        <a href="/onem2m/2019/01/22/GWP_UI.html">More &hellip;</a>
+      
+    
+  </article>
+  
+  <article class="post-body">
+    <h2 class="post-title">
+      <a href="/onem2m/2019/01/21/GWP.html">
+        Mobius 연동 테스트
+      </a>
+    </h2>
+    <div class="post-meta">
+  <span class="post-date">21 Jan 2019</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        <a href="/category/oneM2M.html">
+          onem2m
+        </a>
+      
+    
+  </span>
+</div>
+
+
+    
+      <h1 id="1-registration">1. Registration</h1>
+<p><img src="/assets/gwp/1.reg.png" alt="reg" /></p>
+
+<h1 id="2-dmr">2. DMR</h1>
+<p><img src="/assets/gwp/2.dmr.png" alt="dmr" /></p>
+
+
+    
+
+    
+      
+      
+      
+
+      
+        <a href="/onem2m/2019/01/21/GWP.html">More &hellip;</a>
+      
+    
+  </article>
+  
+  <article class="post-body">
+    <h2 class="post-title">
+      <a href="/frontend/2019/01/17/How-To-LackPack-Impl.html">
+        흔한 언어팩 만들기
+      </a>
+    </h2>
+    <div class="post-meta">
+  <span class="post-date">17 Jan 2019</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        <a href="/category/frentend.html">
+          FrontEnd
+        </a>
+      
+    
+  </span>
+</div>
+
+
+    
+      <h2 id="1-지역화-하기-위해-if문을-이용한-언어설정">1. 지역화 하기 위해 if문을 이용한 언어설정</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+    <span class="kr">boolean</span> <span class="nx">isEnglish</span> <span class="o">=</span> <span class="s2">"en-US"</span> <span class="o">===</span> <span class="s2">"브라우저 언어 감지 값"</span><span class="p">;</span> 
+    <span class="nx">message</span> <span class="o">=</span> <span class="nx">en</span> <span class="p">?</span> <span class="s2">"MESSAGE"</span> <span class="p">:</span> <span class="s2">"메세지"</span><span class="p">;</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+<span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre></div></div>
+<ul>
+  <li>장점 : 빠르게 언어 팩 설정을 할수 있음</li>
+  <li>단점 : 다른 언어의 확장성이 없고, 소스에 들어가 있기 때문에 수정시 오타를 주의 해야 한다.</li>
+  <li>내 경험을 빌리자면 소스 수정 자체가 괴롭다.</li>
+</ul>
+
+
+    
+
+    
+      
+      
+      
+
+      
+        <a href="/frontend/2019/01/17/How-To-LackPack-Impl.html">More &hellip;</a>
+      
+    
+  </article>
+  
+  <article class="post-body">
+    <h2 class="post-title">
+      <a href="/linux/2019/01/16/TCPDump.html">
+        TCPDump 치트 키
+      </a>
+    </h2>
+    <div class="post-meta">
+  <span class="post-date">16 Jan 2019</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        <a href="/category/linux.html">
+          Linux
+        </a>
+      
+    
+  </span>
+</div>
+
+
+    
+      <h1 id="command">Command</h1>
+<ul>
+  <li>TCPDump 분석을 해야할 경우 아래와 같이 덤프 명령어를 사용함
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tcpdump <span class="nt">-D</span> : display all available interfaces
+tcpdump <span class="nt">-i</span> eth0 : capture traffic at the interface “eth0”
+tcpdump <span class="nt">-i</span> any : capture traffic at any interface
+tcpdump <span class="nt">-i</span> wlan0 port 80 : capture traffic at the interface “wlan0” on port 80
+tcpdump <span class="nt">-i</span> wlan0 <span class="nt">-c</span> 5 : capture 5 packets at the interface “wlan0”
+tcpdump <span class="nt">-i</span> wlan0 tcp : capture only tcp traffic at interface “wlan0”
+tcpdump <span class="nt">-i</span> wlan0 src 192.168.1.1 : capture traffic at interface “wlan0” with <span class="nb">source </span>IP 192.168.1.1
+tcpdump <span class="nt">-i</span> wlan0 dst 192.168.1.1 : capture traffic at interface “wlan0” with destination IP 192.168.1.1
+tcpdump src port 22 and dst host 1.2.3.4 : tcpdump <span class="nb">command </span>with boolean opertators
+tcpdump <span class="nt">-i</span> wlan0 <span class="nt">-s</span> 65535 : capture traffic with snapshot size as 65535 bytes, by default its 262144 bytes. Older versions of tcpdump captures 68 or 96 bytes.
+tcpdump <span class="nt">-i</span> wlan0 <span class="nt">-w</span> dump.pcap : capture traffic at the interface “wlan0” and write into a pcap file
+tcpdump <span class="nt">-r</span> dump.pcap : <span class="nb">read </span>captured file <span class="o">(</span>we can use wireshark instead and its preferred<span class="o">)</span>
+tcpdump <span class="nt">-i</span> &lt;interface&gt; <span class="nt">-s</span> 65535 <span class="nt">-w</span> &lt;some-file&gt;.pcap
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+
+    
+
+    
+      
+      
+      
+
+      
+        <a href="/linux/2019/01/16/TCPDump.html">More &hellip;</a>
+      
+    
+  </article>
+  
+  <article class="post-body">
+    <h2 class="post-title">
+      <a href="/frontend/2019/01/15/LackPack.html">
+        나라별 코드 언어 조사
+      </a>
+    </h2>
+    <div class="post-meta">
+  <span class="post-date">15 Jan 2019</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        <a href="/category/frentend.html">
+          FrontEnd
+        </a>
+      
+    
+  </span>
+</div>
+
+
+    
+      <h1 id="사용-조사">사용 조사</h1>
+<ul>
+  <li>이란 : 페르시아어 사용 <a href="https://ko.wikipedia.org/wiki/%ED%8E%98%EB%A5%B4%EC%8B%9C%EC%95%84%EC%96%B4">위키:이란어</a></li>
+  <li>인도네시아 : 인니어 사용 <a href="https://ko.wikipedia.org/wiki/%EC%9D%B8%EB%8F%84%EB%84%A4%EC%8B%9C%EC%95%84%EC%96%B4">위키:이니어</a></li>
+  <li>알제리 : 아랍어 사용 <a href="https://ko.wikipedia.org/wiki/%EC%95%8C%EC%A0%9C%EB%A6%AC">위키:아랍</a></li>
+</ul>
+
+
+    
+
+    
+      
+      
+      
+
+      
+        <a href="/frontend/2019/01/15/LackPack.html">More &hellip;</a>
+      
+    
+  </article>
+  
+  <article class="post-body">
+    <h2 class="post-title">
+      <a href="/linux/2019/01/14/LinuxDisk.html">
+        리눅스 디렉토리 용량 검색
+      </a>
+    </h2>
+    <div class="post-meta">
+  <span class="post-date">14 Jan 2019</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        <a href="/category/linux.html">
+          Linux
+        </a>
+      
+    
+  </span>
+</div>
+
+
+    
+      <ul>
+  <li>목적
+    <ul>
+      <li>리눅스 특정 디렉토리의 용량을 검색 하고 있을 경우 사용함</li>
+    </ul>
+  </li>
+  <li>사용 계기
+    <ul>
+      <li>개발계 서버의 / 디렉토리 용량이 10% 내외로 남아 어떻 디렉토리에서 용량이 차지 했는지 검색 하기 위해 사용</li>
+    </ul>
+  </li>
+</ul>
+
+<p>``` bash</p>
+<h1 id="du-옵션">du 옵션</h1>
+<h1 id="-s-separate-dirs--subdirectories-별-사이즈-출력">-s separate-dirs  subdirectories 별 사이즈 출력</h1>
+<h1 id="-h-human-readable-format-print">-h human-readable format print</h1>
+<h1 id="상세-내용는-man-du-로-확인-가능함">상세 내용는 man du 로 확인 가능함</h1>
+
+<h1 id="du-옵션-기반으로-리눅스-디렉토리-검색-스크립트-내용">du 옵션 기반으로 리눅스 디렉토리 검색 스크립트 내용</h1>
+<p>for i in $(ls -d target/*/)
+do 
+  du -sh $i
+done</p>
+
+
+    
+
+    
+      
+      
+      
+
+      
+        <a href="/linux/2019/01/14/LinuxDisk.html">More &hellip;</a>
+      
+    
+  </article>
+  
+
+  
+<div class="pagination">
+  <a class="pagination-item older"
+     href="/page2">
+    Older
+  </a>
+</div>
+
+
+</div>
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>

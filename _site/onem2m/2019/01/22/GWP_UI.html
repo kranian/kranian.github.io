@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      통합 플랫폼 UI 개발 목표 지표 &middot; Yeo Song Blog
+    
+  </title>
+
+  
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+  <script id="dsq-count-scr" src="//{ site.disqus.shortname }}.disqus.com/count.js" async></script>
+
+  <body class="post">
+
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        Yeo Song Blog
+      </a>
+    </div>
+    <p class="lead"></p>
+  </header>
+  <nav id="sidebar-nav-links">
+  
+    <a class="home-link "
+        href="/">Home</a>
+  
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/about.html">About</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/analysis.html">Analysis</a>
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/frentend.html">FrontEnd</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/linux.html">Linux</a>
+    
+  
+
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/oneM2M.html">onem2m</a>
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/performance.html">Performance</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/springboot.html">Springboot</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/category/work.html">Work</a>
+    
+  
+
+  
+
+  
+    
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+  
+
+  <a id="subscribe-link"
+     class="icon" title="Subscribe" aria-label="Subscribe"
+     href="/feed.xml">
+    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+  </a>
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+    <a id="search-link"
+       class="icon"
+       title="Search" aria-label="Search"
+       href="/search.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+    </a>
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+
+  <p>
+  &copy; 2019.
+  <a href="/LICENSE.md">MIT License.</a>
+</p>
+
+</div>
+
+    <main class="container">
+      <header>
+  <h1 class="post-title">통합 플랫폼 UI 개발 목표 지표</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  <span class="post-date">22 Jan 2019</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        <a href="/category/oneM2M.html">
+          onem2m
+        </a>
+      
+    
+  </span>
+</div>
+
+
+  <div class="post-body">
+    <h1 id="3-통합-플랫폼--ui-동작-환경-개발">3. 통합 플랫폼  UI 동작 환경 개발</h1>
+<ul>
+  <li>아래 OS 플랫폼에서 동작 확인
+    <ul>
+      <li>윈도우즈</li>
+      <li>리눅스</li>
+      <li>안드로이드</li>
+      <li>IOS</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="8플랫폼-응답-속도">8.플랫폼 응답 속도</h1>
+<ul>
+  <li>
+    <p>시험 환경 준비 
+<img src="/assets/gwp/2.cert.png" alt="env1" /></p>
+  </li>
+  <li>GWP: 테스트 횟수 총 5회 시도
+    <ul>
+      <li>목표 : 통합플랫폼UI에서 Create 요청 후 3초 이내에 응답이 와야함
+<img src="/assets/gwp/1.cert.png" alt="env2" /></li>
+      <li>테스트 준비
+        <ol>
+          <li>저장소 생성 : 0.2.481.1.999.1.2.3.Cert
+            <ul>
+              <li>resource address : /base/SAE-0.2.481.1.999.1.2.3.Cert/cnt-0.2.481.1.999.1.2.3.Cert</li>
+            </ul>
+          </li>
+        </ol>
+      </li>
+      <li>테스트 시작 
+<img src="/assets/gwp/3.record.png" alt="env3" />
+        <ol>
+          <li>0.2.481.1.999.1.2.3.Cert <cnt> 자식 리소스 <cin> 생성 / 총 5번 수행</cin></cnt></li>
+        </ol>
+      </li>
+      <li>테스트 근거 자료
+        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">2019</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">21</span> <span class="mi">16</span><span class="o">:</span><span class="mo">02</span><span class="o">:</span><span class="mi">59</span><span class="o">,</span><span class="mi">904</span> <span class="n">INFO</span>  <span class="o">[</span><span class="n">http</span><span class="o">-</span><span class="n">nio</span><span class="o">-</span><span class="mi">8087</span><span class="o">-</span><span class="n">exec</span><span class="o">-</span><span class="mi">4</span><span class="o">]</span> <span class="n">start</span><span class="o">.</span><span class="na">controller</span><span class="o">.</span><span class="na">ResourceController</span><span class="o">[:</span><span class="mi">138</span><span class="o">]</span> <span class="n">create</span> <span class="n">request</span> <span class="n">start</span> <span class="o">:</span> <span class="o">&gt;&gt;</span> <span class="nl">http:</span><span class="c1">//220.123.184.53:8080/base/SAT-kranian1</span>
+<span class="mi">2019</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">21</span> <span class="mi">16</span><span class="o">:</span><span class="mo">02</span><span class="o">:</span><span class="mi">59</span><span class="o">,</span><span class="mi">953</span> <span class="n">INFO</span>  <span class="o">[</span><span class="n">http</span><span class="o">-</span><span class="n">nio</span><span class="o">-</span><span class="mi">8087</span><span class="o">-</span><span class="n">exec</span><span class="o">-</span><span class="mi">4</span><span class="o">]</span> <span class="n">start</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">OkHttpFactoryUtil</span><span class="n">$HttpLogger</span><span class="o">[:</span><span class="mi">127</span><span class="o">]</span>
+<span class="o">+-------------------------------------------------------</span>
+<span class="o">|</span> <span class="o">--&gt;</span> <span class="n">POST</span> <span class="nl">http:</span><span class="c1">//220.123.184.53:8080/base/SAT-kranian1</span>
+<span class="o">|</span> <span class="n">Content</span><span class="o">-</span><span class="nl">Type:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span><span class="o">;</span><span class="n">ty</span><span class="o">=</span><span class="mi">3</span><span class="o">;</span> <span class="n">charset</span><span class="o">=</span><span class="n">utf</span><span class="o">-</span><span class="mi">8</span>
+<span class="o">|</span> <span class="n">Content</span><span class="o">-</span><span class="nl">Length:</span> <span class="mi">29</span>
+<span class="o">|</span> <span class="n">X</span><span class="o">-</span><span class="n">M2M</span><span class="o">-</span><span class="nl">Origin:</span> <span class="n">kranian2</span>
+<span class="o">|</span> <span class="n">X</span><span class="o">-</span><span class="n">M2M</span><span class="o">-</span><span class="nl">RI:</span> <span class="n">AiSOP</span><span class="o">-</span><span class="mi">6</span><span class="n">ddf02679d932e12857b8c2d883193e04f9e5fab</span>
+<span class="o">|</span> <span class="nl">Accept:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+<span class="o">|</span>
+<span class="o">|</span> <span class="o">{</span><span class="s">"m2m:cnt"</span><span class="o">:{</span><span class="s">"rn"</span><span class="o">:</span><span class="s">"kranian2"</span><span class="o">}}</span>
+<span class="o">|</span> <span class="o">--&gt;</span> <span class="n">END</span> <span class="nf">POST</span> <span class="o">(</span><span class="mi">29</span><span class="o">-</span><span class="kt">byte</span> <span class="n">body</span><span class="o">)</span>
+<span class="o">|</span> <span class="o">&lt;--</span> <span class="mi">201</span> <span class="n">Created</span> <span class="nl">http:</span><span class="c1">//220.123.184.53:8080/base/SAT-kranian1 (47ms)</span>
+<span class="o">|</span> <span class="nl">Server:</span> <span class="n">Apache</span><span class="o">-</span><span class="n">Coyote</span><span class="o">/</span><span class="mf">1.1</span>
+<span class="o">|</span> <span class="n">X</span><span class="o">-</span><span class="n">M2M</span><span class="o">-</span><span class="nl">RSC:</span> <span class="mi">2001</span>
+<span class="o">|</span> <span class="n">X</span><span class="o">-</span><span class="n">M2M</span><span class="o">-</span><span class="nl">RI:</span> <span class="n">AiSOP</span><span class="o">-</span><span class="mi">6</span><span class="n">ddf02679d932e12857b8c2d883193e04f9e5fab</span>
+<span class="o">|</span> <span class="n">Content</span><span class="o">-</span><span class="nl">Location:</span> <span class="o">/</span><span class="n">incse</span><span class="o">/</span><span class="n">base</span><span class="o">/</span><span class="n">SAT</span><span class="o">-</span><span class="n">kranian1</span><span class="o">/</span><span class="n">kranian2</span>
+<span class="o">|</span> <span class="n">X</span><span class="o">-</span><span class="n">M2M</span><span class="o">-</span><span class="nl">Origin:</span> <span class="o">/</span><span class="n">incse</span>
+<span class="o">|</span> <span class="n">X</span><span class="o">-</span><span class="n">M2M</span><span class="o">-</span><span class="nl">OT:</span> <span class="mi">20190121</span><span class="n">T160501</span>
+<span class="o">|</span> <span class="n">Content</span><span class="o">-</span><span class="nl">Type:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+<span class="o">|</span> <span class="n">Content</span><span class="o">-</span><span class="nl">Length:</span> <span class="mi">223</span>
+<span class="o">|</span> <span class="nl">Date:</span> <span class="n">Mon</span><span class="o">,</span> <span class="mi">21</span> <span class="n">Jan</span> <span class="mi">2019</span> <span class="mo">07</span><span class="o">:</span><span class="mo">05</span><span class="o">:</span><span class="mo">01</span> <span class="n">GMT</span>
+<span class="o">|</span>
+<span class="o">|</span> <span class="o">{</span><span class="s">"m2m:cnt"</span><span class="o">:{</span><span class="s">"rn"</span><span class="o">:</span><span class="s">"kranian2"</span><span class="o">,</span><span class="s">"ty"</span><span class="o">:</span><span class="mi">3</span><span class="o">,</span><span class="s">"ri"</span><span class="o">:</span><span class="s">"/incse/63d0FNATEne8SqXOYB2Lte"</span><span class="o">,</span><span class="s">"pi"</span><span class="o">:</span><span class="s">"/incse/SSAT-kranian1"</span><span class="o">,</span><span class="s">"ct"</span><span class="o">:</span><span class="s">"20190121T160501"</span><span class="o">,</span><span class="s">"lt"</span><span class="o">:</span><span class="s">"20190121T160501"</span><span class="o">,</span><span class="s">"et"</span><span class="o">:</span><span class="s">"99991231T235959"</span><span class="o">,</span><span class="s">"st"</span><span class="o">:</span><span class="mi">0</span><span class="o">,</span><span class="s">"cr"</span><span class="o">:</span><span class="s">"kranian2"</span><span class="o">,</span><span class="s">"mia"</span><span class="o">:</span><span class="mi">2592000</span><span class="o">,</span><span class="s">"cni"</span><span class="o">:</span><span class="mi">0</span><span class="o">,</span><span class="s">"cbs"</span><span class="o">:</span><span class="mi">0</span><span class="o">}}</span>
+<span class="o">|</span> <span class="o">&lt;--</span> <span class="n">END</span> <span class="nf">HTTP</span> <span class="o">(</span><span class="mi">223</span><span class="o">-</span><span class="kt">byte</span> <span class="n">body</span><span class="o">)</span>
+<span class="o">+-------------------------------------------------------</span>
+<span class="mi">2019</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">21</span> <span class="mi">16</span><span class="o">:</span><span class="mo">02</span><span class="o">:</span><span class="mi">59</span><span class="o">,</span><span class="mi">953</span> <span class="n">INFO</span>  <span class="o">[</span><span class="n">http</span><span class="o">-</span><span class="n">nio</span><span class="o">-</span><span class="mi">8087</span><span class="o">-</span><span class="n">exec</span><span class="o">-</span><span class="mi">4</span><span class="o">]</span> <span class="n">start</span><span class="o">.</span><span class="na">controller</span><span class="o">.</span><span class="na">ResourceController</span><span class="o">[:</span><span class="mi">142</span><span class="o">]</span> <span class="n">create</span> <span class="n">response</span> <span class="n">end</span> <span class="o">:</span> <span class="o">&gt;&gt;</span>  <span class="n">duration</span> <span class="n">time</span> <span class="mi">49</span><span class="n">ms</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>와이어 샤크 근거 자료 사용</li>
+</ul>
+
+
+    
+
+
+
+<div class="post-tags">
+  
+    
+    <a href="/tags.html#ux-test-performance">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">ux,test,performance</span>
+    </a>
+  
+</div>
+  </div>
+
+  
+  <section class="comments">
+    <h2>Comments</h2>
+    
+  <div id="disqus_thread">
+    <!--<button class="disqus-load" onClick="loadDisqusComments()">-->
+      <!--Load Comments-->
+    <!--</button>-->
+    <script>
+    var d = document, s = d.createElement('script');
+    s.src = '//kranian.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    </script>
+  </div>
+  <script>
+
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW
+  *  TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT:s
+  *  https://disqus.com/admin/universalcode/#configuration-variables
+  */
+  var disqus_config = function () {
+    this.page.url = "http://0.0.0.0:4000/onem2m/2019/01/22/GWP_UI.html";
+    this.page.identifier = "" ||
+                           "http://0.0.0.0:4000/onem2m/2019/01/22/GWP_UI.html";
+  }
+  function loadDisqusComments() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//kranian.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  </script>
+  <noscript>
+    Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus</a>.
+  </noscript>
+
+
+
+  </section>
+
+  <section class="related">
+  <h2>Related Posts</h2>
+  <ul class="posts-list">
+    
+      <li>
+        <h3>
+          <a href="/onem2m/2019/01/31/onem2m_tester_install.html">
+            IoTKETI/oneM2MTester 설치 하기
+            <small>31 Jan 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/onem2m/2019/01/31/onem2m_tester_cli.html">
+            IoTKETI/oneM2MTester CLI 모드로 실행 하기
+            <small>31 Jan 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/meetup/2019/01/27/IOTBadge.html">
+            마이크로파이썬 네임태그 앱 이식 하기(IBM Developer Meetup 2018)
+            <small>27 Jan 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</section>
+
+</div>
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>
