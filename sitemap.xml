@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://kranian.github.io/</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/about.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/category/analysis.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/category/frentend.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/category/linux.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/category/oneM2M.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/category/performance.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/category/springboot.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/category/work.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/tags.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/search.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/onem2m/2019/01/31/onem2m_tester_install.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/onem2m/2019/01/31/onem2m_tester_cli.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/meetup/2019/01/27/IOTBadge.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/github/2019/01/24/Scouter-Papaper.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/onem2m/2019/01/22/GWP_UI.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/onem2m/2019/01/21/GWP.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/frontend/2019/01/17/How-To-LackPack-Impl.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/linux/2019/01/16/TCPDump.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/frontend/2019/01/15/LackPack.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/linux/2019/01/14/LinuxDisk.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/linux/2019/01/11/PCP.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/linux/2019/01/11/LinuxPerformance.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/work/2019/01/11/GIOT.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kranian.github.io/git/2019/01/14/GITCommitEmoji.html</loc>
+  <lastmod>2019-02-07T01:50:04+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>
