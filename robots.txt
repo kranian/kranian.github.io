@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: http://kranian.github.io/sitemap.xml
