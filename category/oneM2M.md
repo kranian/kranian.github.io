@@ -1,4 +1,4 @@
 ---
 layout: category
-title: onem2m
+title: Onem2m
 ---
