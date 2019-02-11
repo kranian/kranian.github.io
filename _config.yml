@@ -5,7 +5,7 @@ highlighter:      rouge
 # Setup
 title:            Yeo Song Blog
 tagline:          'Daily Developer'
-description:      ''
+description:      '백엔드 개발자 허여송입니다.'
 url:              https://kranian.github.io
 #baseurl:          '/'
                   # the optional subpath of your site, e.g. "/blog"
