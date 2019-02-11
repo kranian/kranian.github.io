@@ -2,7 +2,7 @@
 layout: post
 title:  엘라스틱 서치 6.5.5 -> 6.6.0 업그레이드 치트 키  
 categories:
-  - tdd
+  - Tdd
 tags :   
   - es stack    
 ---
