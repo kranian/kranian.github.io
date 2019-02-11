@@ -12,7 +12,7 @@
   {% endif %}
 {% endfor %}
 {% for category in site.categories %}
-      <a href="{{ root_url }}/{{ site.category_dir }}#{{ category | first }}"
+      <a href="{{ root_url }}/{{ site.category_dir }}{{ category | first }}.html"
          class="sidebar-nav-item pl-3rem">
                             <span class="name">
                                 {{ category | first }}
