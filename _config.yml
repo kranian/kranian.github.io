@@ -15,7 +15,7 @@ url:              https://kranian.github.io
                   # sidebar_blog_link below.
 
 author:
-  name:           'yeosong heo'  
+  name:           'Heo Yeo Song'  
 
 paginate:         10
 # paginate_path:    '/page:num'
@@ -36,3 +36,7 @@ disqus :
   shortname : kranian
 
 google_analytics : UA-134052535-1
+
+category_dir: category/
+tag_dir: tag/
+
