@@ -6,7 +6,9 @@
   {% if node.title != null %}
     {% if node.layout == "category" %}
       <a class="category-link {% if page.url == node.url %} active{% endif %}"
-          href="{{ site.baseurl }}{{ node.url }}">{{ node.title }}</a>
+          href="{{ site.baseurl }}{{ node.url }}">{{ node.title }}
+          <span class="badge">{{ category | last | size }}</span>
+      </a>
     {% endif %}
   {% endif %}
 {% endfor %}
