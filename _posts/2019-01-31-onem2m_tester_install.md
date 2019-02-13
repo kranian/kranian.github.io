@@ -2,7 +2,7 @@
 layout: post
 title: IoTKETI/oneM2MTester 설치 하기 
 categories:
-  - onem2m
+  - Onem2m
 tags:
   - test
   - eclipse

@@ -2,7 +2,7 @@
 layout: post
 title: IoTKETI/oneM2MTester CLI 모드로 실행 하기 
 categories:
-  - onem2m
+  - Onem2m
 tags:
   - test
   - eclipse
