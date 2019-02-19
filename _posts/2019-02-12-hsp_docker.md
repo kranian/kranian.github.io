@@ -34,4 +34,8 @@ exports.DB_HOST_NAME = '127.0.0.1';
 exports.DB_USER = 'root';
 exports.DB_PASSWORD = 'hsp.admin';
 exports.DB_NAME = 'hsp';
+
+참고 자료 NODE JS 도커 이미지 만들기 
+ - https://nodejs.org/en/docs/guides/nodejs-docker-webapp
+ - https://medium.com/oracledevs/from-locally-running-node-application-to-cloud-based-kubernetes-deployment-1fed34280952
 ```

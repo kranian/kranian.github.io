@@ -17,7 +17,7 @@ Ubuntu 18.04 기반 Docker-CE 환경에서 S/W를 설치 한다.  Ubuntu 18.04 �
  - Command 
  ```bash
  docker volume create portainer_data
- docker run -d --restart=always -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+ docker run -d --restart=always --name portainer -p 9001:9000 -v /var/run/docker.sock:/var/run/docker.sock -v /home/volumes/portainer_data:/data portainer/portainer:1.20.1
  ```
  - 설치 결과 
  
