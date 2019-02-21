@@ -104,9 +104,9 @@ sudo docker run -p 53160:53160 \
 EXPOSE 8285:8285/udp    
 https://stackoverflow.com/questions/27596409/how-do-i-expose-a-udp-port-on-docker
 
-
+<entry key="mrdb.database.name">incsedb</entry>
 
 http://gitlab.irexnet.co.kr:9000 -> 
-http://gitlab.irexnet.co.kr:8083 -> 메모칸  
+http://gitlab.irexnet.co.kr
 ``` 
 # 
