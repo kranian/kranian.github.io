@@ -90,11 +90,16 @@ docker volume create --name mongoconfig3
 
 - example
 
-docker service create --replicas 1 --network mongo --mount type=volume,source=mongodata1,target=/data/db --mount type=volume,source=mongoconfig1,target=/data/configdb --constraint 'node.labels.mongo.replica == 1' --name mongo1 mongo:3.2 mongod --replSet example
-docker service create --replicas 1 --network mongo --mount type=volume,source=mongodata2,target=/data/db --mount type=volume,source=mongoconfig2,target=/data/configdb --constraint 'node.labels.mongo.replica == 2' --name mongo2 mongo:3.2 mongod --replSet example
-docker service create --replicas 1 --network mongo --mount type=volume,source=mongodata3,target=/data/db --mount type=volume,source=mongoconfig3,target=/data/configdb --constraint 'node.labels.mongo.replica == 3' --name mongo3 mongo:3.2 mongod --replSet example
+docker service create -e TZ=Asia/Seoul --replicas 1 --network mongo --mount type=volume,source=mongodata1,target=/data/db --mount type=volume,source=mongoconfig1,target=/data/configdb --constraint 'node.labels.mongo.replica == 1' --name mongo1 mongo:3.2 mongod --replSet incsedb
+docker service create -e TZ=Asia/Seoul --replicas 1 --network mongo --mount type=volume,source=mongodata2,target=/data/db --mount type=volume,source=mongoconfig2,target=/data/configdb --constraint 'node.labels.mongo.replica == 2' --name mongo2 mongo:3.2 mongod --replSet incsedb
+docker service create -e TZ=Asia/Seoul --replicas 1 --network mongo --mount type=volume,source=mongodata3,target=/data/db --mount type=volume,source=mongoconfig3,target=/data/configdb --constraint 'node.labels.mongo.replica == 3' --name mongo3 mongo:3.2 mongod --replSet incsedb
 docker service inspect --pretty mongo1
 
+
+- 
+docker exec -it $(docker ps -qf label=com.docker.swarm.service.name=mongo1) mongo --eval 'rs.initiate({ _id: "incsedb", members: [{ _id: 1, host: "mongo1:27017" }, { _id: 2, host: "mongo2:27017" }, { _id: 3, host: "mongo3:27017" }], settings: { getLastErrorDefaults: { w: "majority", wtimeout: 30000 }}})'
+
+docker exec -it $(docker ps -qf label=com.docker.swarm.service.name=mongo1) mongo --eval 'rs.status()'
 - example
 docker service create --env 'MONGO_URL=mongodb://mongo1:27017,mongo2:27017,mongo3:27017/koalab?replicaSet=example' --name koalab --network mongo --replicas 2 --publish 8083:8080 kalahari/koalab
 
