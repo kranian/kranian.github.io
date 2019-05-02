@@ -2,9 +2,9 @@
 layout: post
 title:  엘라스틱 서치 6.5.5 -> 6.6.0 업그레이드 치트 키  
 categories:
-  - Tdd
+  - ElasticSearch
 tags :   
-  - es stack    
+  - Es_Stack
 ---
 ```
 1. Disable shard allocation
