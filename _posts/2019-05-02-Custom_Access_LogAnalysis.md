@@ -50,8 +50,8 @@ JEUS 샘플 액세스
  - 아래와 내용을  docker-compose.yml 로 저장한다. 
 version: '3.2'
 services:
-elk:
-  image: sebp/elk:7.0.0
+ elk:
+  image: sebp/elk:700
   environment:
    - LOGSTASH_START=0
    - KIBANA_START=1
@@ -64,10 +64,11 @@ elk:
    - 9200:9200
    - 5000:5000
   volumes:
-   - elk-data:/var/lib/elasticsearch 
+   - elk-data:/var/lib/elasticsearch
+
 volumes:
-elk-data:
-  external: true     
+  elk-data:
+ 
  ```
  - 이제 아래 CLI 기반으로 elk 기동 한다.
  - 아래 명령어를 터미널에 입력하자  
