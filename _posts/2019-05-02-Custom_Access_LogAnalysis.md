@@ -119,11 +119,14 @@ curl -v -XPUT -H "Content-type: application/json" -d '{
 # 5. FileBeat 설치 
  ```
 # 맥용 파일 비트 다운로드 
-curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.0.1-darwin-x86_64.tar.gz
+curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.0.0-darwin-x86_64.tar.gz
+# 리눅스용 다운로드 
+https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.0.0-linux-x86_64.tar.gz
+
 # 압축 해제 
-tar xzvf filebeat-7.0.1-darwin-x86_64.tar.gz
+tar xzvf filebeat-7.0.0-darwin-x86_64.tar.gz
 # 파일비트 설치 경로 이동 
-cd filebeat-7.0.1-darwin-x86_64
+cd filebeat-7.0.0-darwin-x86_64
   ```
  - filebeat.yml 파일 내용에 아래와 같이 설정한다.  
 
