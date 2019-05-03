@@ -243,13 +243,10 @@ output {
 ![log-analysis2](/assets/catpure/kibana-jeus-log-analysis-map.png) 
  - 지도에서 사용자 위치 확인 
  - 차트 만드는 방법도 가이드 하고 싶으나 시간 관계상 여기는 넣지 않는다. 
- 
  - 나는 차트 만들때 https://demo.elastic.co/app/kibana 에 web traffic 대쉬보드를 참고 해 만들었다.
-![log-visual-ref](/assets/catpure/jeus-log-visual-ref.png)  
  
-
-
-     
+![log-visual-ref](/assets/catpure/jeus-log-visual-ref.png)  
+      
 # 참고 
  - docker-compose 설정 파일고 filebeat, logstash 설정 했던 파일들 github에 올려 놓는다. 
    - https://github.com/kranian/es-jeus-log-analysis
