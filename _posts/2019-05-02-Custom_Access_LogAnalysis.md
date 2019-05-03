@@ -6,7 +6,10 @@ categories:
 tags :   
   - Es_Stack    
 ---
-
+# 0. 요구 사항 
+ - 아래 작업을 진행을 이해 하기 위해서는 엘라스틱 스택에 대한 사전 지식이 필요하다.
+ - 데이터 분석 엔지니어 나 장애 분석 엔지니어 라면 엘라스틱 스택에 대해 배울만한 가치가 있다고 생각한다.    
+ 
 # 1. JEUS 로거 샘플 포맷    
 ```
 JEUS 샘플 액세스 로그   
@@ -67,14 +70,15 @@ elk-data:
   external: true     
  ```
  - 이제 아래 CLI 기반으로 elk 기동 한다.
-  
+ - 아래 명령어를 터미널에 입력하자  
  
  ```bash
 # 영구 볼륨 생성  
 docker volume create elk-data
 # docker elk 기동
-# 주의 사항은 docker-compose.yml 파일이 있는곳에서 반든시 실행 한다.  
+# 주의 사항은 docker-compose.yml 파일이 있는곳에서 반드시 실행 한다.  
 docker-compose up -d
+
  ```
 # 4. index 텀플릿 설정
  - 터미널 아래 명령어 엘라스틱 서치 템플릿 설정 실행  
@@ -109,9 +113,8 @@ curl -v -XPUT -H "Content-type: application/json" -d '{
  
  - 성공하면 acknowledge : true 라고 나온다 
  - 이제 ElasticSearch에 넣을 준비가 끝났다  
- - 템플릿 작업은 DB와 비유 하자만 DB 테이블 데이터 타입을 미리 정의 하는것 과 같다. 
-   - 위 명령어는 index 패턴이 jeus-log로 시작하는 prefix는 내가 정의한 데이터 정의로 만들어줘 라고 해석 하면 된다.    
- 
+   - 이 템플릿 작업은 DB와 비유 하자만 한 데이터 로우의 데이터 타입을 미리 정의 하는것 과 같다.        
+ - 만약 이작업을 않하면 geo location 정보를 엘라스틱에서 타입을 알수 없어 다이나믹 데이터 포맷으로 자동 인식 된다. 
    
 # 5. FileBeat 설치 
  ```
@@ -127,25 +130,15 @@ filebeat.inputs:
 - type: log
   # 로그 분석 하고자 하는 곳의 디렉토리 및 로그 파일 패턴을 입력 하고 저장한다.  
   paths:
-    - /home/kranian/project/elk/logs/*.log 
-#============================= Filebeat modules ===============================
+    - /home/kranian/project/elk/logs/*.log # 로그 디렉토리 설정 및 패턴 설정, wildcard 패턴을 사용하여 로그를 입력하자
 
-filebeat.config.modules:
-  # Glob pattern for configuration loading
-  path: ${path.config}/modules.d/*.yml
+  # tail_files: true # filebeat 시작시점 기준 파일 끝에서부터 로깅을 읽기 시작
+  # ignore_older: 1m # filebeat 시작시점 기준 1분전의 내용은 무시        
 
-  # Set to true to enable config reloading
-  reload.enabled: false
 #----------------------------- Logstash output --------------------------------
 output.logstash:
   # The Logstash hosts
   hosts: ["127.0.0.1:5044"]
-
-#================================ Processors =====================================
-
-processors:
-  - add_host_metadata: ~
-  - add_cloud_metadata: ~
 
 #================================ Logging =====================================
 logging.level: debug
@@ -158,7 +151,9 @@ logging.selectors: ["*"]
 ./filebeat -e -c filebeat.yml -d publish 
 ```
 
- - 참고사항으로 filebeat 에서 로그파일 읽었던 Fileoffset을 리셋 하고 있을 경우 $FILE_BEAT_HOME/data/registry 폴더을 삭제한다. 
+  - 위와 같이 설정파일을 작성한 다음 아래처럼 실행을 하면 엑세스 파일의 내용이 filebeat를 거치고 logstash를 거쳐 최종적으로 elasticsearch 에 도달하게 된다. 기존에 엑세스 로그가 양이 많다면 그 정보를 다 읽는 시간이 걸리므로 주의한다. (filebeat 자체적으로 해당 파일의 offset을 관리하기 때문)
+ - 파일의 offset 관리는 $FILE_BEAT_HOME/data/registry 관리 한다. 
+ - 만약 리로드 하고 싶자면 registry 폴더를 삭제 한다.    
  
 # 6. logStatsh 설치
  
@@ -180,27 +175,32 @@ input {
   }
 }
 
+# grok 필터를 활용하여 엑세스로그 한줄을 아래처럼 파싱하겠다는 의미
+# 해당 필터는 JEUS 로깅 설정에 의해 만들어지는 파일의 포멧에 맞추어 설정해야한다.
 filter {
   grok {
     match => { "message" => ["\[%{YEAR:year}.%{MONTHNUM:month}.%{MONTHDAY:day} %{HOUR:hour}:%{MINUTE:minutes}:%{SECOND:second}\] %{IP:clientip:ip} \"%{WORD:method} %{URIPATHPARAM:request}\" %{NUMBER:status_code} %{NUMBER:response}"] 
     }
   }
+# IP 기준으로 geo location을 변환한다. 
+# logstash에 내용 엔진에 해당 내용을 파싱한다.   
   geoip {
     source => "clientip"
     target => "geoip"
   } 
-
+# 파싱 한 결과를 시간으로 변환하여 필드로 변환 하여 저장한다.  
   mutate {
         add_field => { 
             "timestamp" => "%{year}.%{month}.%{day} %{hour}:%{minutes}:%{second}"
         }
   } 
+# timestamp 포맷을 설정한다.   
   date {
        match => [ "timestamp" , "yyyy.MM.dd HH:mm:ss" ]
        locale => "ko"
   }
   mutate {
-      remove_field => [ "year" ,"month","day","hour","minutes","second"]
+      remove_field => [ "year" ,"month","day","hour","minutes","second","tags"]
   } 
   
 }
@@ -215,30 +215,43 @@ output {
   }
 }
 ``` 
-
  - logstash.conf 파일로 저장 하고 기동 
- 
-```bash
- 
-./logstash -e -c logstash.conf
-```  
 
-# JEUS 로그 기반 으로 가시화
-  
+```bash 
+./logstash  -e -c logstash.conf
+```   
+ - 메시지 파싱을 디버깅 하고 싶을 경우 kibana 개발자 도구의 GROK 디버거를 사용하자 
+   - https://www.elastic.co/guide/en/kibana/current/grokdebugger-getting-started.html
+ - 아래 그림은 JEUS 메시지 파싱 디버깅 결과다  
+![grok-debuger](/assets/catpure/log-grok-debuger.png)
+
+
+ - 잠시 후 logstash에 JEUS 로그가 적재 되면서 Elasticksearch에 적재가 된다. 
+
+# 7. Kibana 에서 가시화 작업 진행 
+ - 해당 부분은 Kibana 교육 영상으로 대체 한다. 
+ - 차트 만드는 방법은 아래 링크를 확인한다. kibana5이나 6는 차트 생성 방법이 동일하다.아래 링크를 통해 강의듣고 만들어 보아라    
+   - https://www.youtube.com/watch?v=xPjNtd8xUZo
+          
+# 8. 최종 JEUS 로그 기반 으로 가시화 
+    
 ![log-analysis1](/assets/catpure/kibana-jeus-log-analysis.png)
  - 사용자 요청 및 방문자 수 가시화  
  - 응답 시간 분포도 확인 가시화 
  - 사용자 위치 확인 가시화 
  
 ![log-analysis2](/assets/catpure/kibana-jeus-log-analysis-map.png) 
- - 지도에서 사용자 위치 확인
+ - 지도에서 사용자 위치 확인 
+ - 차트 만드는 방법도 가이드 하고 싶으나 시간 관계상 여기는 넣지 않는다. 
  
-- 차트 만드는 방법도 가이드 하고 싶으나 시간 관계상 여기는 넣지 않는다. 
- - 차트 만드는 방법은 아래 링크를 확인한다. kibana5이나 6는 차트 생성 방법이 동일하다.아래 링크를 통해 강의듣고 만들어 보아라    
-   - https://www.youtube.com/watch?v=xPjNtd8xUZo
+ - 나는 차트 만들때 https://demo.elastic.co/app/kibana 에 web traffic 대쉬보드를 참고 해 만들었다.
+![log-visual-ref](/assets/catpure/jeus-log-visual-ref.png)  
+ 
+
+
      
 # 참고 
  - docker-compose 설정 파일고 filebeat, logstash 설정 했던 파일들 github에 올려 놓는다. 
    - https://github.com/kranian/es-jeus-log-analysis
- 
+ - [누구나 할 수 있는 엑세스 로그 분석 따라 해보기 (by Elastic Stack)](https://taetaetae.github.io/2019/02/10/access-log-to-elastic-stack/)
 
