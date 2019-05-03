@@ -73,11 +73,11 @@ volumes:
  - 아래 명령어를 터미널에 입력하자  
  
  ```bash
-# 영구 볼륨 생성  
-docker volume create elk-data
 # docker elk 기동
 # 주의 사항은 docker-compose.yml 파일이 있는곳에서 반드시 실행 한다.  
 docker-compose up -d
+
+# 그려면 기동 되는것을 확인 할수 있다. 
 
  ```
 # 4. index 텀플릿 설정
@@ -118,9 +118,12 @@ curl -v -XPUT -H "Content-type: application/json" -d '{
    
 # 5. FileBeat 설치 
  ```
- # curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.0.1-darwin-x86_64.tar.gz
- # tar xzvf filebeat-7.0.1-darwin-x86_64.tar.gz
- # cd filebeat-7.0.1-darwin-x86_64
+# 맥용 파일 비트 다운로드 
+curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.0.1-darwin-x86_64.tar.gz
+# 압축 해제 
+tar xzvf filebeat-7.0.1-darwin-x86_64.tar.gz
+# 파일비트 설치 경로 이동 
+cd filebeat-7.0.1-darwin-x86_64
   ```
  - filebeat.yml 파일 내용에 아래와 같이 설정한다.  
 
@@ -158,11 +161,14 @@ logging.selectors: ["*"]
 # 6. logStatsh 설치
  
  ```
- # curl -L -O https://artifacts.elastic.co/downloads/logstash/logstash-7.0.0.tar.gz
- # tar xzvf logstash-7.0.0.tar.gz
- # cd logstash-7.0.0
- # cd bin 
+# Java 기반 logstash라 Any Platform 임 다운로드   
+curl -L -O https://artifacts.elastic.co/downloads/logstash/logstash-7.0.0.tar.gz
+# 압축 해제 
+tar xzvf logstash-7.0.0.tar.gz
+cd logstash-7.0.0
+cd bin 
 ```  
+
  - logstash 설정 파일을 아래와 같이 생성 한다.
   
 ``` 
@@ -226,9 +232,11 @@ output {
 ![grok-debuger](/assets/catpure/log-grok-debuger.png)
 
 
- - 잠시 후 logstash에 JEUS 로그가 적재 되면서 Elasticksearch에 적재가 된다. 
-
-# 7. Kibana 에서 가시화 작업 진행 
+ - 잠시 후 logstash에 JEUS 로그가 적재 되면서 Elasticsearch 에 적재가 된다. 
+ - 키바나의 매니지먼트 화면에서 Elasticsearch index management 에서 jeus_log-2019.04.30 패턴이 생성되었지 확인 한다. 
+ 
+# 7. Kibana 에서 가시화 작업 진행
+  
  - 해당 부분은 Kibana 교육 영상으로 대체 한다. 
  - 차트 만드는 방법은 아래 링크를 확인한다. kibana5이나 6는 차트 생성 방법이 동일하다.아래 링크를 통해 강의듣고 만들어 보아라    
    - https://www.youtube.com/watch?v=xPjNtd8xUZo
