@@ -227,7 +227,7 @@ output {
  - logstash.conf 파일로 저장 하고 기동 
 
 ```bash 
-./logstash  -e -c logstash.conf
+./logstash  -f logstash.conf
 ```   
  - 메시지 파싱을 디버깅 하고 싶을 경우 kibana 개발자 도구의 GROK 디버거를 사용하자 
    - https://www.elastic.co/guide/en/kibana/current/grokdebugger-getting-started.html
