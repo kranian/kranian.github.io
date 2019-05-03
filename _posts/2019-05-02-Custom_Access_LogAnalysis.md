@@ -43,11 +43,9 @@ JEUS 샘플 액세스
  - docker install 
    - https://docs.docker.com/install/linux/docker-ce/ubuntu/
  - docker-compose Install
-   - https://docs.docker.com/compose/install/
-      
- ``` 
- 
- - 아래와 내용을  docker-compose.yml 로 저장한다. 
+   - https://docs.docker.com/compose/install/   
+ - 아래와 내용을  docker-compose.yml 로 저장한다.       
+ ```  
 version: '3.2'
 services:
  elk:
