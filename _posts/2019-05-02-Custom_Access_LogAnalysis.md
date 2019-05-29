@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  엘라스틱 스택을 활용한 JEUS 엑세스 로그 분석   
+title:  JEUS Access Log 분석   
 categories:
   - ElasticSearch
 tags :   
@@ -118,15 +118,13 @@ curl -v -XPUT -H "Content-type: application/json" -d '{
    
 # 5. FileBeat 설치 
  ```
-# 맥용 파일 비트 다운로드 
-curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.0.0-darwin-x86_64.tar.gz
 # 리눅스용 다운로드 
 https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.0.0-linux-x86_64.tar.gz
 
 # 압축 해제 
-tar xzvf filebeat-7.0.0-darwin-x86_64.tar.gz
+tar xzvf filebeat-7.0.0-linux-x86_64.tar.gz
 # 파일비트 설치 경로 이동 
-cd filebeat-7.0.0-darwin-x86_64
+cd filebeat-7.0.0-linux-x86_64
   ```
  - filebeat.yml 파일 내용에 아래와 같이 설정한다.  
 
@@ -245,7 +243,11 @@ output {
    - https://www.youtube.com/watch?v=xPjNtd8xUZo
           
 # 8. 최종 JEUS 로그 기반 으로 가시화 
-    
+ - 아래 키바나 차트 object를 키비나 관리 폐이지에서 import 한다.
+   1. JEUS 로그 기반으로 만든 키바나 차트 패키지 [jeus-log-analysis](/assets/attach/jeus-log-analysis.json)
+   2. 그려면 DASHBOARD 메뉴에서 JEUS 로그 분석 대쉬보드가 나온다.  
+     
+ 
 ![log-analysis1](/assets/catpure/kibana-jeus-log-analysis.png)
  - 사용자 요청 및 방문자 수 가시화  
  - 응답 시간 분포도 확인 가시화 
@@ -258,8 +260,8 @@ output {
  
 ![log-visual-ref](/assets/catpure/jeus-log-visual-ref.png)  
       
-# 참고 
- - docker-compose 설정 파일고 filebeat, logstash 설정 했던 파일들 github에 올려 놓는다. 
+## 참고
+ - docker-compose 설정 파일고 filebeat, logstash 설정 했던 파일들 github에 올려 놓았다. 
    - https://github.com/kranian/es-jeus-log-analysis
  - [누구나 할 수 있는 엑세스 로그 분석 따라 해보기 (by Elastic Stack)](https://taetaetae.github.io/2019/02/10/access-log-to-elastic-stack/)
 
